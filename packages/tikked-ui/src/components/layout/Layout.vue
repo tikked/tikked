@@ -3,7 +3,7 @@
 
   <div class="flex justify-center">
     <div class="max-w-screen-md w-full">
-      <slot />
+      <router-view></router-view>
     </div>
   </div>
 </template>

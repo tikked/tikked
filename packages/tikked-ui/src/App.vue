@@ -1,8 +1,5 @@
 <template>
-  <Layout>
-    <h1 class="text-4xl">Welcome to Tikked!</h1>
-    <p>Test</p>
-  </Layout>
+  <Layout></Layout>
 </template>
 
 <script>

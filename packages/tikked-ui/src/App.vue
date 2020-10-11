@@ -1,21 +1,17 @@
 <template>
-  <h1 class=" text-4xl">Welcome to Tikked!</h1>
+  <Layout>
+    <h1 class="text-4xl">Welcome to Tikked!</h1>
+    <p>Test</p>
+  </Layout>
 </template>
 
 <script>
+import Layout from './components/layout/Layout';
 
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Layout
+  }
 };
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

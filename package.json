@@ -1,0 +1,10 @@
+{
+  "name": "tikked",
+  "version": "0.1.0",
+  "repository": "https://github.com/tikked/tikked.git",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "prettier": "^2.1.2"
+  }
+}

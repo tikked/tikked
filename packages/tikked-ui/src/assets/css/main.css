@@ -1,0 +1,20 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+  body {
+    font-size: 1rem;
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 400;
+    src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+  }
+}

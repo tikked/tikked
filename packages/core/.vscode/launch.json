@@ -1,0 +1,75 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Test",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "--colors",
+                "${workspaceFolder}/test/*.ts"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Server",
+            "runtimeArgs": [
+                "--require",
+                "ts-node/register",
+                "--require",
+                "source-map-support/register"
+            ],
+            "args": [
+                "${workspaceFolder}/server.ts"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Server - dist",
+            "preLaunchTask": "npm: build",
+            "runtimeArgs": [
+                "--require",
+                "source-map-support/register"
+            ],
+            "args": [
+                "${workspaceFolder}/dist/server.js"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch",
+            "runtimeArgs": [
+                "--require",
+                "ts-node/register",
+                "--require",
+                "source-map-support/register"
+            ],
+            "args": [
+                "${workspaceFolder}/index.ts",
+                "-r",
+                "samples/",
+                "-a",
+                "st",
+                "{}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+        }
+    ]
+}

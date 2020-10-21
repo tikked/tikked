@@ -7,7 +7,4 @@ import router from './router';
 
 import '@/assets/css/main.css';
 
-createApp(App)
-  .use(router)
-  .use(VueAxios, axios)
-  .mount('#app');
+createApp(App).use(router).use(VueAxios, axios).mount('#app');

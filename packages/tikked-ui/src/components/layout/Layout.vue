@@ -2,7 +2,7 @@
   <Topbar />
 
   <div class="flex justify-center">
-    <div class="max-w-screen-md w-full">
+    <div class="max-w-screen-lg w-full">
       <router-view></router-view>
     </div>
   </div>

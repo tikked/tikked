@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full sticky h-topbar shadow-md mb-4">
-    <div class="max-w-screen-md flex mx-auto h-full">
+  <div class="w-full sticky h-topbar shadow-md mb-4 bg-white">
+    <div class="max-w-screen-lg flex mx-auto h-full">
       <div class="flex-auto py-2">
         <router-link to="/" class="flex flex-row items-center h-full">
           <img src="@/assets/images/logo.png" class="h-full max-h-full" />

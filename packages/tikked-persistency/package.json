@@ -1,0 +1,59 @@
+{
+  "name": "tikked-persistency",
+  "version": "0.0.1",
+  "description": "A feature flag thingy",
+  "main": "dist/src/index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inversify": "^5.0.1",
+    "inversify-express-utils": "^6.3.2",
+    "io-ts": "^1.10.4",
+    "io-ts-reporters": "0.0.21",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.1.0",
+    "tikked-core": "0.0.1"
+  },
+  "private": true,
+
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": "src",
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "temp-dir": "./.nyc_output/",
+    "all": true
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist .nyc_output coverage",
+    "count": "cloc --by-file-by-lang src",
+    "coverage": "nyc yarn test",
+    "lint-fix": "eslint --fix ./src/**",
+    "lint": "eslint ./src/**",
+    "test": "mocha",
+    "prepare": "yarn build",
+    "pretty": "prettier-eslint fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tikked/tikked.git"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggle"
+  ],
+  "author": "Alex Bondo Andersen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tikked/tikked/issues"
+  },
+  "homepage": "https://github.com/tikked/tikked#readme",
+  "files": [
+    "dist/*"
+  ],
+  "types": "dist/src/index.d.ts"
+}

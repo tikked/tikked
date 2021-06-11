@@ -1,0 +1,58 @@
+{
+    "$schema": "../node_modules/tikked-persitency/ApplicationEnvironment.json",
+    "id": "st",
+    "name": "Project System",
+    "contextSchema": {
+        "attributes": [{
+            "id": "userId",
+            "name": "User Id",
+            "description": "The id of the user (mongo id)"
+        }, {
+            "id": "projectId",
+            "name": "Project Id",
+            "description": "The id of the study (mongo id)"
+        }]
+    },
+    "description": "",
+    "featureFlags": [{
+        "id": "kanban",
+        "name": "Kanban Module",
+        "description": "Indicates whether the Kanban module is available",
+        "toggles": [{
+            "context": {
+                "userId": "1"
+            },
+            "isActive": true
+        },{
+            "context": {
+                "projectId": "1"
+            },
+            "isActive": true
+        },{
+            "context": {},
+            "isActive": false
+        }]
+    },{
+        "id": "burndown",
+        "name": "Burndown Module",
+        "description": "Indicates whether the Burndown module is available",
+        "toggles": [{
+            "context": {},
+            "isActive": true
+        }]
+    },{
+        "id": "sprint",
+        "name": "Sprint Module",
+        "description": "Indicates whether the Sprint module is available",
+        "toggles": [{
+            "context": {
+                "userId": "1",
+                "projectId": "1"
+            },
+            "isActive": true
+        },{
+            "context": {},
+            "isActive": false
+        }]
+    }]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "tikked-cli",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "count": "cloc --by-file-by-lang src",
+    "coverage": "nyc npm test",
+    "lint-fix": "npm run lint -- --fix",
+    "lint": "tslint --project .",
+    "start": "node --require ts-node/register --require source-map-support/register ./index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tikked/tikked.git"
+  },
+  "private": true,
+  "author": "Alex Bondo Andersen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tikked/tikked/issues"
+  },
+  "homepage": "https://github.com/tikked/tikked#readme",
+  "dependencies": {
+    "command-line-args": "^5.1.1",
+    "command-line-usage": "^6.0.1",
+    "tikked-core": "0.0.1",
+    "tikked-persistency": "0.0.1"
+  }
+}

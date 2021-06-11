@@ -1,0 +1,49 @@
+{
+  "name": "tikked-core",
+  "version": "0.0.1",
+  "description": "A feature flag thingy",
+  "main": "dist/src/index.js",
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": "src",
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "temp-dir": "./.nyc_output/",
+    "all": true
+  },
+  "private": true,
+
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist .nyc_output coverage",
+    "count": "cloc --by-file-by-lang src",
+    "coverage": "nyc yarn test",
+    "lint-fix": "eslint --fix ./src/**",
+    "lint": "eslint ./src/**",
+    "test": "mocha",
+    "prepare": "yarn build",
+    "pretty": "prettier-eslint %INIT_CWD%/src/**/*.ts %INIT_CWD%/test/**/*.ts %INIT_CWD%/.*.{ts,js} --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tikked/tikked.git"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggle"
+  ],
+  "author": "Alex Bondo Andersen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tikked/tikked/issues"
+  },
+  "homepage": "https://github.com/tikked/tikked#readme",
+  "files": [
+    "dist/*"
+  ],
+  "types": "dist/src/index.d.ts"
+}

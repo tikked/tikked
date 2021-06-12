@@ -18,7 +18,7 @@ export class Toggle {
    */
   public matches(context: Context): boolean {
     return this.context.Keys.every(
-      key => context.hasKey(key) && this.context.get(key) === context.get(key)
+      key => context.hasKey(key) && this.context.matchKeyValue(key, context.get(key))
     );
   }
 }

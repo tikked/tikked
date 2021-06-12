@@ -174,4 +174,35 @@ describe('Context', () => {
       expect(json).to.eql(expectedJson);
     });
   });
+
+  describe('matchKeyValue', () => {
+    describe('when constructed with single key', () => {
+      const contextData = { key: 'value' };
+      const context = new Context(contextData);
+
+      it('should return false for key that does not exist', () => {
+        // Act
+        const res = context.matchKeyValue('invalidKey', 'invalidValue');
+
+        // Assert
+        expect(res).to.be.false;
+      });
+
+      it('should return false for an existing key but invalid value', () => {
+        // Act
+        const res = context.matchKeyValue('key', 'invalidValue');
+
+        // Assert
+        expect(res).to.be.false;
+      });
+
+      it('should return true for an existing key and valid value', () => {
+        // Act
+        const res = context.matchKeyValue('key', 'value');
+
+        // Assert
+        expect(res).to.be.true;
+      });
+    });
+  });
 });

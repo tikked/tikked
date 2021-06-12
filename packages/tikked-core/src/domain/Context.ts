@@ -23,6 +23,10 @@ export class Context {
   public toJSON(): ContextData {
     return this.contextData;
   }
+
+  public matchKeyValue(key: string, value: string): boolean {
+    return this.hasKey(key) && this.get(key) === value;
+  }
 }
 
 interface ContextData {

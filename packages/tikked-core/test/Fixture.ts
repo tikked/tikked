@@ -14,7 +14,7 @@ export const becomesTrue = (condition: () => boolean, frequencyMs = 10, timeoutM
     new Promise(resolve => {
       interval = setInterval(() => {
         if (condition()) {
-          resolve();
+          resolve(undefined);
         }
       }, frequencyMs);
     }),

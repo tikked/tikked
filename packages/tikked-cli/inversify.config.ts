@@ -1,5 +1,5 @@
 import { Container } from 'inversify';
-import { ApplicationEnvironmentRepository, Coder, StreamFactory, FileStreamFactory, JsonCoder, TYPES, RestApiStreamFactory } from 'tikked-persistency';
+import { ApplicationEnvironmentRepository, Coder, StreamFactory, FileStreamFactory, JsonCoder, TYPES, RestApiStreamFactory, errorHandler } from 'tikked-persistency';
 
 export function createContainer(applicationEnvironmentRoot: string): Container {
   const container = new Container();
@@ -12,6 +12,9 @@ export function createContainer(applicationEnvironmentRoot: string): Container {
   container
     .bind<string>(TYPES.ApplicationEnvironmentRoot)
     .toConstantValue(applicationEnvironmentRoot);
+  container
+    .bind<errorHandler>(TYPES.ErrorHandler)
+    .toConstantValue(console.error);
   return container;
 }
 
@@ -26,5 +29,8 @@ export function createContainerRest(applicationEnvironmentRoot: string): Contain
   container
     .bind<string>(TYPES.ApplicationEnvironmentRootUrl)
     .toConstantValue(applicationEnvironmentRoot);
+  container
+    .bind<errorHandler>(TYPES.ErrorHandler)
+    .toConstantValue(console.error);
   return container;
 }

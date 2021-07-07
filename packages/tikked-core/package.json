@@ -16,7 +16,6 @@
     "all": true
   },
   "private": true,
-
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist .nyc_output coverage",

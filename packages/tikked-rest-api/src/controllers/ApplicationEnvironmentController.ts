@@ -4,6 +4,7 @@ import { ApplicationEnvironmentRepository } from 'tikked-persistency';
 import { inject } from 'inversify';
 import { controller, httpGet, interfaces, request, requestParam } from 'inversify-express-utils';
 import { distinctUntilChanged, map, skip, take, timeout } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 
 @controller('/application-environment')
 export class ApplicationEnvironmentController implements interfaces.Controller {
@@ -17,17 +18,16 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
         id: string,
         @request()
         req: express.Request
-    ): Promise<ApplicationEnvironment> {
+    ): Promise<ApplicationEnvironment | undefined> {
         const wait = req.query.wait === 'true';
-        return this.repo
+        return firstValueFrom(this.repo
             .get(id)
             .pipe(
                 distinctUntilChanged((x, y) => x === y),
                 skip(wait ? 1 : 0),
                 wait ? timeout(60000) : map(x => x),
                 take(1)
-            )
-            .toPromise();
+            ));
     }
 
     @httpGet('/:id/feature-set')

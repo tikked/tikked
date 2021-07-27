@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --require ts-node/register --require source-map-support/register ./server.ts",
     "lint-fix": "eslint --fix ./src/**",
     "lint": "eslint ./src/**",

@@ -74,14 +74,14 @@ module.exports = {
     '@typescript-eslint/unified-signatures': 'error',
     'arrow-body-style': 'error',
     'arrow-parens': ['error', 'as-needed'],
-    camelcase: 'error',
+    'camelcase': 'error',
     'comma-dangle': 'off',
-    complexity: 'off',
+    'complexity': 'off',
     'constructor-super': 'error',
-    curly: ['error', 'multi-line'],
+    'curly': ['error', 'multi-line'],
     'dot-notation': 'error',
     'eol-last': 'error',
-    eqeqeq: ['error', 'always'],
+    'eqeqeq': ['error', 'always'],
     'guard-for-in': 'error',
     'id-blacklist': [
       'error',
@@ -92,8 +92,7 @@ module.exports = {
       'string',
       'Boolean',
       'boolean',
-      'Undefined',
-      'undefined'
+      'null'
     ],
     'id-match': 'error',
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['test/**/*.ts'] }],
@@ -159,7 +158,7 @@ module.exports = {
     'prefer-const': 'error',
     'prefer-object-spread': 'error',
     'quote-props': ['error', 'consistent-as-needed'],
-    radix: 'error',
+    'radix': 'error',
     'space-before-function-paren': 'off',
     'space-in-parens': ['error', 'never'],
     'spaced-comment': 'error',
@@ -174,7 +173,7 @@ module.exports = {
           'no-reference-import': true,
           'one-line': [true, 'check-open-brace', 'check-whitespace'],
           'prefer-conditional-expression': true,
-          whitespace: [
+          'whitespace': [
             true,
             'check-branch',
             'check-decl',

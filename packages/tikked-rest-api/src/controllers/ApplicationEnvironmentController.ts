@@ -14,20 +14,18 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
 
     @httpGet('/:id')
     private index(
-        @requestParam('id')
-        id: string,
-        @request()
-        req: express.Request
+        @requestParam('id') id: string,
+        @request() req: express.Request
     ): Promise<ApplicationEnvironment | undefined> {
         const wait = req.query.wait === 'true';
-        return firstValueFrom(this.repo
-            .get(id)
-            .pipe(
+        return firstValueFrom(
+            this.repo.get(id).pipe(
                 distinctUntilChanged((x, y) => x === y),
                 skip(wait ? 1 : 0),
                 wait ? timeout(60000) : map(x => x),
                 take(1)
-            ));
+            )
+        );
     }
 
     @httpGet('/:id/feature-set')

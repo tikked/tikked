@@ -104,8 +104,7 @@ module.exports = {
             "string",
             "Boolean",
             "boolean",
-            "Undefined",
-            "undefined"
+            "null"
         ],
         "id-match": "error",
         "import/no-extraneous-dependencies": [

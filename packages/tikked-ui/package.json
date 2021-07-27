@@ -15,7 +15,6 @@
     "vue-router": "^4.0.0-0"
   },
   "private": true,
-
   "eslintConfig": {
     "root": true,
     "env": {
@@ -34,5 +33,9 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "devDependencies": {
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-service": "^4.5.13"
+  }
 }

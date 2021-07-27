@@ -16,17 +16,17 @@ const container = createContainer('samples');
 // create server
 const server = new InversifyExpressServer(container);
 server.setConfig(app => {
-  // add body parser
-  app.use(
-    bodyParser.urlencoded({
-      extended: true
-    })
-  );
-  app.use(bodyParser.json());
-  app.use(cors());
+    // add body parser
+    app.use(
+        bodyParser.urlencoded({
+            extended: true
+        })
+    );
+    app.use(bodyParser.json());
+    app.use(cors());
 });
 
 const application = server.build();
 application.listen(3000, () => {
-  console.log(`Server started in ${Date.now() - start} millies`);
+    console.log(`Server started in ${Date.now() - start} millies`);
 });

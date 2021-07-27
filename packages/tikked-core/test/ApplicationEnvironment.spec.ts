@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { ApplicationEnvironment } from '../src/domain/ApplicationEnvironment';
 import { Context } from '../src/domain/Context';
 import { ContextSchema } from '../src/domain/ContextSchema';
@@ -12,6 +11,7 @@ import {
   createId,
   createName
 } from './Fixture';
+import { expect } from 'chai';
 
 describe('ApplicationEnvironment', () => {
   describe('contructor', () => {

@@ -1,8 +1,8 @@
-import { expect } from 'chai';
 import { Context } from '../src/domain/Context';
 import { FeatureFlag } from '../src/domain/FeatureFlag';
 import { Toggle } from '../src/domain/Toggle';
 import { createDescription, createId, createName, createToggle } from './Fixture';
+import { expect } from 'chai';
 
 describe('FeatureFlag', () => {
   const defaultId = createId();

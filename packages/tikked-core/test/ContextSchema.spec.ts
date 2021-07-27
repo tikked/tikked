@@ -1,9 +1,8 @@
-import { expect } from 'chai';
-import { Attribute } from '../src/domain/Attribute';
 import { Context } from '../src/domain/Context';
 import { ContextSchema } from '../src/domain/ContextSchema';
 import { Toggle } from '../src/domain/Toggle';
 import { createAttribute, createId } from './Fixture';
+import { expect } from 'chai';
 
 describe('ContextSchema', () => {
   describe('contructor', () => {

@@ -1,6 +1,6 @@
-import { expect } from 'chai';
 import { Context } from '../src/domain/Context';
 import { Toggle } from '../src/domain/Toggle';
+import { expect } from 'chai';
 
 describe('Toggle', () => {
   describe('constructor', () => {

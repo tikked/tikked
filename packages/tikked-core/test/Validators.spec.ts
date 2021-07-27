@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import { validateIsNotEmpty } from '../src/utility/Validators';
+import { expect } from 'chai';
 
 describe('validateIsNotEmpty', () => {
   describe('with invalid input', () => {

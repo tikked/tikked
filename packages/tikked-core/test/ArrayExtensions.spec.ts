@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import '../src/utility/ArrayExtensions';
+import { expect } from 'chai';
 
 describe('Array', () => {
   describe('duplicates', () => {

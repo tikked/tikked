@@ -1,6 +1,6 @@
-import { expect } from 'chai';
 import { Attribute } from '../src/domain/Attribute';
 import { createDescription, createId, createName } from './Fixture';
+import { expect } from 'chai';
 
 describe('Attribute', () => {
   describe('constructor', () => {

@@ -163,20 +163,6 @@ describe('ContextSchema', () => {
         // Assert
         expect(res).to.equal(toggle);
       });
-
-      it('should throw when given single non-empty-context toggle', () => {
-        // Arrange
-        const key = 'key';
-        const context = new Context({ [key]: 'value' });
-        const toggle = new Toggle(true, context);
-
-        // Act
-        expect(() => {
-          const res = contextSchema.getMostRelevant([toggle]);
-        })
-          // Assert
-          .to.throw(new RegExp(`attribute.*${key}`));
-      });
     });
 
     describe('with single attributes in schema', () => {

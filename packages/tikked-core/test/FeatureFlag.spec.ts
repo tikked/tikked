@@ -48,17 +48,6 @@ describe('FeatureFlag', () => {
         // Assert
         .to.throw('empty');
     });
-
-    it('should throw when there is no toggle for empty context', () => {
-      // Act
-      expect(() => {
-        const featureFlag = new FeatureFlag(defaultId, defaultName, defaultDescription, [
-          new Toggle(true, new Context({ key: 'value' }))
-        ]);
-      })
-        // Assert
-        .to.throw('empty context');
-    });
   });
 
   describe('getToggles', () => {

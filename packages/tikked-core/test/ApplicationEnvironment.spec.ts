@@ -165,8 +165,7 @@ describe('ApplicationEnvironment', () => {
         [
           new FeatureFlag(featureFlagId, createName(), createDescription(), [
             new Toggle(true, new Context({ [attribute]: attributeValue1 })),
-            new Toggle(true, new Context({ [attribute]: attributeValue2 })),
-            new Toggle(false, new Context({}))
+            new Toggle(true, new Context({ [attribute]: attributeValue2 }))
           ])
         ]
       );
@@ -217,12 +216,10 @@ describe('ApplicationEnvironment', () => {
         createContextSchema([createAttribute(attribute1), createAttribute(attribute2)]),
         [
           new FeatureFlag(featureFlagId1, createName(), createDescription(), [
-            new Toggle(true, new Context({ [attribute1]: attributeValue1 })),
-            new Toggle(false, new Context({}))
+            new Toggle(true, new Context({ [attribute1]: attributeValue1 }))
           ]),
           new FeatureFlag(featureFlagId2, createName(), createDescription(), [
-            new Toggle(true, new Context({ [attribute2]: attributeValue2 })),
-            new Toggle(false, new Context({}))
+            new Toggle(true, new Context({ [attribute2]: attributeValue2 }))
           ])
         ]
       );

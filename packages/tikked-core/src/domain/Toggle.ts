@@ -1,14 +1,15 @@
 import { Context } from './Context';
+import { Matcher } from './matchers/Matcher';
+import { SupersetMatcher } from './matchers/SupersetMatcher';
 
 export class Toggle {
-  public constructor(private isActive: boolean, private context: Context) {}
+  private matcher: Matcher;
+  public constructor(private isActive: boolean, context: Context) {
+    this.matcher = new SupersetMatcher(context);
+  }
 
   public get IsActive() {
     return this.isActive;
-  }
-
-  public get Context() {
-    return this.context;
   }
 
   /**
@@ -17,8 +18,6 @@ export class Toggle {
    * @param context The context that is matched with this toggle
    */
   public matches(context: Context): boolean {
-    return this.context.Keys.every(
-      key => context.hasKey(key) && this.context.matchKeyValue(key, context.get(key))
-    );
+    return this.matcher.matches(context);
   }
 }

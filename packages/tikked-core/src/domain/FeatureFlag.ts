@@ -44,8 +44,5 @@ export class FeatureFlag implements Identifiable {
 
   private validateToggles(toggles: Toggle[]) {
     validateIsNotEmpty(toggles, 'Toggles should be non-empty');
-    if (toggles.every(tog => tog.Context.Keys.length > 0)) {
-      throw new Error('Feature flag must have a toggle with an empty context');
-    }
   }
 }

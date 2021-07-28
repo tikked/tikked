@@ -26,7 +26,6 @@ export class ContextSchema {
    * attributes
    */
   public getMostRelevant(toggles: Toggle[]): Toggle {
-    toggles.map(tog => tog.Context).forEach(this.validateContext.bind(this));
     return toggles[0];
   }
 

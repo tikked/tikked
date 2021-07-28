@@ -4,12 +4,16 @@ import { SupersetMatcher } from './matchers/SupersetMatcher';
 
 export class Toggle {
   private matcher: Matcher;
-  public constructor(private isActive: boolean, context: Context) {
+  public constructor(private isActive: boolean, private context: Context) {
     this.matcher = new SupersetMatcher(context);
   }
 
   public get IsActive() {
     return this.isActive;
+  }
+
+  public get Matcher() {
+    return this.matcher;
   }
 
   /**

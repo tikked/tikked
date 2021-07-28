@@ -1,7 +1,7 @@
 import { Context } from '../Context';
-import { Matcher } from './Matcher';
+import { ContextMatcher } from './Matcher';
 
-export class SupersetMatcher implements Matcher {
+export class SupersetMatcher implements ContextMatcher {
   public constructor(private context: Context) {}
 
   public get Context() {

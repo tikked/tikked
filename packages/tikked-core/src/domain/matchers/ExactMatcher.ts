@@ -1,7 +1,7 @@
 import { Context } from '../Context';
-import { Matcher } from './Matcher';
+import { ContextMatcher } from './Matcher';
 
-export class ExactMatcher implements Matcher {
+export class ExactMatcher implements ContextMatcher {
   public constructor(private context: Context) {}
 
   public get Context() {

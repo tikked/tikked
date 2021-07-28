@@ -5,3 +5,4 @@ export * from './ContextSchema';
 export * from './FeatureFlag';
 export * from './Toggle';
 export * from './Identifiable';
+export * from './matchers/Matcher';

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { ApplicationEnvironment } from 'tikked-core';
+import { ApplicationEnvironment, ContextMatcher } from 'tikked-core';
 import { JsonCoder } from '../src/persistency/JsonCoder';
 import {
   createAttribute,
@@ -261,7 +261,7 @@ describe('JsonCoder', () => {
         const res = runDecoder();
 
         // Assert
-        expect(res.FeatureFlags[0].Toggles[0].Context.Keys).to.be.empty;
+        expect((res.FeatureFlags[0].Toggles[0].Matcher as ContextMatcher).Context.Keys).to.be.empty;
       });
     });
     describe('with no feature flags and with attributes', () => {

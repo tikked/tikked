@@ -42,12 +42,4 @@ export class ContextSchema {
       )
     );
   }
-
-  private validateContext(context: Context): void {
-    const attrIdSet = new Set(this.Attributes.map(attr => attr.Id));
-    const unknownAttrs = new Set(context.Keys.filter(contKey => !attrIdSet.has(contKey)));
-    if (unknownAttrs.size > 0) {
-      throw new Error(`Unknown attributes ${[...unknownAttrs].join(', ')}`);
-    }
-  }
 }

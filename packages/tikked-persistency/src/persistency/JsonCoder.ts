@@ -7,8 +7,8 @@ import {
   Context,
   ContextSchema,
   FeatureFlag,
-  Matcher,
   SupersetMatcher,
+  ExactMatcher,
   Toggle
 } from 'tikked-core';
 import { Decoder, Encoder } from '.';
@@ -92,6 +92,8 @@ const mapMatcher = (matcher: { $type: string; context: { [x: string]: string } }
   switch (matcher.$type) {
     case 'superset':
       return new SupersetMatcher(new Context(matcher.context));
+    case 'exact':
+      return new ExactMatcher(new Context(matcher.context));
     default:
       throw new Error(`Unknown matcher type: ${matcher.$type}`);
   }

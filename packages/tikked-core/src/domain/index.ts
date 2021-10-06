@@ -6,3 +6,5 @@ export * from './FeatureFlag';
 export * from './Toggle';
 export * from './Identifiable';
 export * from './matchers/Matcher';
+export * from './matchers/SupersetMatcher';
+export * from './matchers/ExactMatcher';

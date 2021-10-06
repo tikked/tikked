@@ -4,6 +4,7 @@ import { Attribute } from '../src/domain/Attribute';
 import { Context } from '../src/domain/Context';
 import { ContextSchema } from '../src/domain/ContextSchema';
 import { FeatureFlag } from '../src/domain/FeatureFlag';
+import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 import { Toggle } from '../src/domain/Toggle';
 
 export const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -28,7 +29,7 @@ export const becomesTrue = (condition: () => boolean, frequencyMs = 10, timeoutM
 export const createFeatureFlag = (id?: string) =>
   new FeatureFlag(id || createId(), createName(), createDescription(), [createToggle()]);
 
-export const createToggle = () => new Toggle(true, createContext());
+export const createToggle = () => new Toggle(true, new SupersetMatcher(createContext()));
 
 export const createContext = () => new Context({});
 

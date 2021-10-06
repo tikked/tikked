@@ -1,16 +1,17 @@
 import { Context } from '../src/domain/Context';
 import { Toggle } from '../src/domain/Toggle';
 import { expect } from 'chai';
+import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 
 describe('Toggle', () => {
   describe('constructor', () => {
     it('should be implemented', () => {
-      const toggle = new Toggle(true, new Context({}));
+      const toggle = new Toggle(true, new SupersetMatcher(new Context({})));
     });
   });
   describe('with empty context', () => {
     const emptyContext = new Context({});
-    const toggle = new Toggle(true, emptyContext);
+    const toggle = new Toggle(true, new SupersetMatcher(emptyContext));
 
     describe('matches', () => {
       it('should be implemented', () => {
@@ -44,7 +45,7 @@ describe('Toggle', () => {
     const singleKeyContextData = { [key]: value };
     const singleKeyContext = new Context(singleKeyContextData);
     const emptyContext = new Context({});
-    const toggle = new Toggle(true, singleKeyContext);
+    const toggle = new Toggle(true, new SupersetMatcher(singleKeyContext));
 
     describe('matches', () => {
       it('when called with empty context should return false', () => {
@@ -101,7 +102,7 @@ describe('Toggle', () => {
     const multiKeyContextData = { [key]: value, [key2]: value2 };
     const multiKeyContext = new Context(multiKeyContextData);
     const emptyContext = new Context({});
-    const toggle = new Toggle(true, multiKeyContext);
+    const toggle = new Toggle(true, new SupersetMatcher(multiKeyContext));
 
     describe('matches', () => {
       it('when called with empty context should return false', () => {

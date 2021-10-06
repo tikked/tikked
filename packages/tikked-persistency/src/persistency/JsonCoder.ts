@@ -7,6 +7,8 @@ import {
   Context,
   ContextSchema,
   FeatureFlag,
+  SupersetMatcher,
+  ExactMatcher,
   Toggle
 } from 'tikked-core';
 import { Decoder, Encoder } from '.';
@@ -21,9 +23,14 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
 
   private static contextDecoder = t.record(t.string, t.string);
 
+  private static matcherDecoder = t.type({
+    $type: t.string,
+    context: JsonCoder.contextDecoder
+  });
+
   private static toggleDecoder = t.type({
     isActive: t.boolean,
-    context: JsonCoder.contextDecoder
+    matcher: JsonCoder.matcherDecoder
   });
 
   private static featureFlagDecoder = t.type({
@@ -61,8 +68,7 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
       res.description,
       new ContextSchema(
         res.contextSchema.attributes.map(
-          attr =>
-            new Attribute(attr.id, attr.name, attr.description)
+          attr => new Attribute(attr.id, attr.name, attr.description)
         )
       ),
       res.featureFlags.map(
@@ -71,9 +77,7 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
             ff.id,
             ff.name,
             ff.description,
-            ff.toggles.map(
-              tog => new Toggle(tog.isActive, new Context(tog.context))
-            )
+            ff.toggles.map(tog => new Toggle(tog.isActive, mapMatcher(tog.matcher)))
           )
       )
     );
@@ -83,3 +87,14 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
     return JSON.stringify(appEnv);
   }
 }
+
+const mapMatcher = (matcher: { $type: string; context: { [x: string]: string } }) => {
+  switch (matcher.$type) {
+    case 'superset':
+      return new SupersetMatcher(new Context(matcher.context));
+    case 'exact':
+      return new ExactMatcher(new Context(matcher.context));
+    default:
+      throw new Error(`Unknown matcher type: ${matcher.$type}`);
+  }
+};

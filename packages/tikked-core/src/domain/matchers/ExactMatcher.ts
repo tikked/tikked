@@ -2,6 +2,7 @@ import { Context } from '../Context';
 import { ContextMatcher } from './Matcher';
 
 export class ExactMatcher implements ContextMatcher {
+  private $type = 'superset';
   public constructor(private context: Context) {}
 
   public get Context() {

@@ -3,6 +3,7 @@ import { FeatureFlag } from '../src/domain/FeatureFlag';
 import { Toggle } from '../src/domain/Toggle';
 import { createDescription, createId, createName, createToggle } from './Fixture';
 import { expect } from 'chai';
+import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 
 describe('FeatureFlag', () => {
   const defaultId = createId();
@@ -53,8 +54,8 @@ describe('FeatureFlag', () => {
   describe('getToggles', () => {
     describe('with single contextual toggle and empty-context toggle', () => {
       const contextData = { key: 'value' };
-      const toggle = new Toggle(true, new Context(contextData));
-      const emptyContextToggle = new Toggle(false, new Context({}));
+      const toggle = new Toggle(true, new SupersetMatcher(new Context(contextData)));
+      const emptyContextToggle = new Toggle(false, new SupersetMatcher(new Context({})));
       const featureFlag = new FeatureFlag(defaultId, defaultName, defaultDescription, [
         toggle,
         emptyContextToggle
@@ -104,9 +105,9 @@ describe('FeatureFlag', () => {
       const contextData1 = { key1: 'value1' };
       const contextData2 = { key2: 'value2' };
       const contextDataCombined = { ...contextData1, ...contextData2 };
-      const toggle1 = new Toggle(true, new Context(contextData1));
-      const toggle2 = new Toggle(true, new Context(contextData2));
-      const emptyContextToggle = new Toggle(false, new Context({}));
+      const toggle1 = new Toggle(true, new SupersetMatcher(new Context(contextData1)));
+      const toggle2 = new Toggle(true, new SupersetMatcher(new Context(contextData2)));
+      const emptyContextToggle = new Toggle(false, new SupersetMatcher(new Context({})));
       const featureFlag = new FeatureFlag(defaultId, defaultName, defaultDescription, [
         toggle1,
         toggle2,

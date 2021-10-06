@@ -181,6 +181,7 @@ describe('JsonCoder', () => {
       const description = createDescription();
       const isActive = true;
       const context = {};
+      const matcher = {"$type":"superset", context}
       const contextSchema = {
         attributes: []
       };
@@ -192,7 +193,7 @@ describe('JsonCoder', () => {
           toggles: [
             {
               isActive,
-              context
+              matcher
             }
           ]
         }

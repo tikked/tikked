@@ -55,12 +55,22 @@
     },
     "Toggle": {
       "properties": {
-        "context": {
-          "$ref": "#/definitions/Context"
+        "matcher": {
+          "anyOf": [{
+            "properties": {
+              "context": {
+                "$ref": "#/definitions/Context"
+              },
+              "$type": {
+                "enum": ["superset", "exact"]
+              }
+            },
+            "type": "object"
+          }]
         },
         "isActive": {
           "type": "boolean"
-        }
+        },
       },
       "type": "object"
     }

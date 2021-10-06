@@ -12,6 +12,7 @@ import {
   createName
 } from './Fixture';
 import { expect } from 'chai';
+import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 
 describe('ApplicationEnvironment', () => {
   describe('contructor', () => {
@@ -164,8 +165,8 @@ describe('ApplicationEnvironment', () => {
         createContextSchema([createAttribute(attribute)]),
         [
           new FeatureFlag(featureFlagId, createName(), createDescription(), [
-            new Toggle(true, new Context({ [attribute]: attributeValue1 })),
-            new Toggle(true, new Context({ [attribute]: attributeValue2 }))
+            new Toggle(true, new SupersetMatcher(new Context({ [attribute]: attributeValue1 }))),
+            new Toggle(true, new SupersetMatcher(new Context({ [attribute]: attributeValue2 })))
           ])
         ]
       );
@@ -216,10 +217,10 @@ describe('ApplicationEnvironment', () => {
         createContextSchema([createAttribute(attribute1), createAttribute(attribute2)]),
         [
           new FeatureFlag(featureFlagId1, createName(), createDescription(), [
-            new Toggle(true, new Context({ [attribute1]: attributeValue1 }))
+            new Toggle(true, new SupersetMatcher(new Context({ [attribute1]: attributeValue1 })))
           ]),
           new FeatureFlag(featureFlagId2, createName(), createDescription(), [
-            new Toggle(true, new Context({ [attribute2]: attributeValue2 }))
+            new Toggle(true, new SupersetMatcher(new Context({ [attribute2]: attributeValue2 })))
           ])
         ]
       );

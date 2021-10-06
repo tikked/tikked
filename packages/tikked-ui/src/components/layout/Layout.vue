@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Topbar from '@/components/layout/Topbar';
+import Topbar from '@/components/layout/Topbar.vue';
 
 export default {
   components: {

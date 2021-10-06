@@ -19,7 +19,7 @@
                 "-r",
                 "samples/",
                 "-a",
-                "st",
+                "ps",
                 "{}"
             ],
             "console": "integratedTerminal",

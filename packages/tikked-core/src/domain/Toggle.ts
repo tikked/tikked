@@ -3,9 +3,7 @@ import { Matcher } from './matchers/Matcher';
 import { SupersetMatcher } from './matchers/SupersetMatcher';
 
 export class Toggle {
-  private matcher: Matcher;
-  public constructor(private isActive: boolean, private context: Context) {
-    this.matcher = new SupersetMatcher(context);
+  public constructor(private isActive: boolean, private matcher: Matcher) {
   }
 
   public get IsActive() {

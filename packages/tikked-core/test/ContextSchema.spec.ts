@@ -3,6 +3,7 @@ import { ContextSchema } from '../src/domain/ContextSchema';
 import { Toggle } from '../src/domain/Toggle';
 import { createAttribute, createId } from './Fixture';
 import { expect } from 'chai';
+import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 
 describe('ContextSchema', () => {
   describe('contructor', () => {
@@ -155,7 +156,7 @@ describe('ContextSchema', () => {
       it('should return single empty-context toggle given', () => {
         // Arrange
         const context = new Context({});
-        const toggle = new Toggle(true, context);
+        const toggle = new Toggle(true, new SupersetMatcher(context));
 
         // Act
         const res = contextSchema.getMostRelevant([toggle]);
@@ -171,7 +172,7 @@ describe('ContextSchema', () => {
       it('should return single empty-context toggle given', () => {
         // Arrange
         const context = new Context({});
-        const toggle = new Toggle(true, context);
+        const toggle = new Toggle(true, new SupersetMatcher(context));
 
         // Act
         const res = contextSchema.getMostRelevant([toggle]);
@@ -183,7 +184,7 @@ describe('ContextSchema', () => {
       it('should return single non-empty-context toggle given with matching attribute', () => {
         // Arrange
         const context = new Context({ [attributeId]: 'value' });
-        const toggle = new Toggle(true, context);
+        const toggle = new Toggle(true, new SupersetMatcher(context));
 
         // Act
         const res = contextSchema.getMostRelevant([toggle]);
@@ -196,8 +197,8 @@ describe('ContextSchema', () => {
         // Arrange
         const context1 = new Context({});
         const context2 = new Context({ [attributeId]: 'value' });
-        const toggle1 = new Toggle(true, context1);
-        const toggle2 = new Toggle(true, context2);
+        const toggle1 = new Toggle(true, new SupersetMatcher(context1));
+        const toggle2 = new Toggle(true, new SupersetMatcher(context2));
 
         // Act
         const res = contextSchema.getMostRelevant([toggle2, toggle1]);
@@ -219,8 +220,8 @@ describe('ContextSchema', () => {
         // Arrange
         const context1 = new Context({ [attributeId1]: 'value' });
         const context2 = new Context({ [attributeId2]: 'value' });
-        const toggle1 = new Toggle(true, context1);
-        const toggle2 = new Toggle(true, context2);
+        const toggle1 = new Toggle(true, new SupersetMatcher(context1));
+        const toggle2 = new Toggle(true, new SupersetMatcher(context2));
 
         // Act
         const res = contextSchema.getMostRelevant([toggle1, toggle2]);
@@ -247,10 +248,10 @@ describe('ContextSchema', () => {
             [attributeId1]: 'value',
             [attributeId2]: 'value'
           });
-          toggleEmpty = new Toggle(true, contextEmpty);
-          toggle1 = new Toggle(true, context1);
-          toggle2 = new Toggle(true, context2);
-          toggle12 = new Toggle(true, context12);
+          toggleEmpty = new Toggle(true, new SupersetMatcher(contextEmpty));
+          toggle1 = new Toggle(true, new SupersetMatcher(context1));
+          toggle2 = new Toggle(true, new SupersetMatcher(context2));
+          toggle12 = new Toggle(true, new SupersetMatcher(context12));
         });
         [
           {
@@ -300,8 +301,8 @@ describe('ContextSchema', () => {
           [attributeId2]: 'value'
         });
         const context3 = new Context({ [attributeId3]: 'value' });
-        const toggle12 = new Toggle(true, context12);
-        const toggle3 = new Toggle(true, context3);
+        const toggle12 = new Toggle(true, new SupersetMatcher(context12));
+        const toggle3 = new Toggle(true, new SupersetMatcher(context3));
 
         // Act
         const res = contextSchema.getMostRelevant([toggle3, toggle12]);

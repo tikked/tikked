@@ -1,6 +1,11 @@
 {
   "name": "@tikked/ui",
   "version": "0.0.1",
+  "main": "lib/index.js",
+  "files": [
+    "/dist",
+    "/lib"
+  ],
   "scripts": {
     "serve": "vite",
     "build": "vite build",

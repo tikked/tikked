@@ -4,11 +4,15 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [vue()],
+  base: '',
   server: {
     port: 8080,
     fs: {
       strict: false
     }
+  },
+  build: {
+    outDir: 'lib/dist'
   },
   resolve: {
     alias: {

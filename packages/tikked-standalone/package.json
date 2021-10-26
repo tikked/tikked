@@ -1,0 +1,15 @@
+{
+  "name": "tikked-standalone",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon --watch . --watch ../tikked-ui"
+  },
+  "dependencies": {
+    "express": "~4.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}

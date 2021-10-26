@@ -20,7 +20,7 @@
                 "samples/",
                 "-a",
                 "ps",
-                "{}"
+                "{\"userId\":\"x\"}"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",

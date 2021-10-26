@@ -43,6 +43,15 @@
                 },
                 {
                     "matcher": {
+                        "$type": "regex",
+                        "context": {
+                            "userId": ".*"
+                        }
+                    },
+                    "isActive": true
+                },
+                {
+                    "matcher": {
                         "$type": "superset",
                         "context": {}
                     },

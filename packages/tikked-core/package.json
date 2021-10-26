@@ -45,5 +45,8 @@
   "files": [
     "dist/*"
   ],
-  "types": "dist/src/index.d.ts"
+  "types": "dist/src/index.d.ts",
+  "devDependencies": {
+    "fast-check": "^2.19.0"
+  }
 }

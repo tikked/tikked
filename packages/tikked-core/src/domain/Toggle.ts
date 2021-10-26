@@ -1,6 +1,5 @@
 import { Context } from './Context';
 import { Matcher } from './matchers/Matcher';
-import { SupersetMatcher } from './matchers/SupersetMatcher';
 
 export class Toggle {
   public constructor(private isActive: boolean, private matcher: Matcher) {

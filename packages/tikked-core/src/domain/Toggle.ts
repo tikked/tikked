@@ -2,8 +2,7 @@ import { Context } from './Context';
 import { Matcher } from './matchers/Matcher';
 
 export class Toggle {
-  public constructor(private isActive: boolean, private matcher: Matcher) {
-  }
+  public constructor(private isActive: boolean, private matcher: Matcher) {}
 
   public get IsActive() {
     return this.isActive;

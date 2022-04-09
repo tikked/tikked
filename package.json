@@ -60,6 +60,7 @@
         "test": "lerna run test",
         "build": "lerna bootstrap",
         "postinstall": "link-parent-bin",
-        "clean": "rimraf packages/*/node_modules node_modules"
+        "clean": "rimraf packages/*/node_modules node_modules",
+        "pretty": "prettier-eslint ./packages/*/{src,test}/**/*.{ts,js,json} ./packages/*/.*.{ts,js,json} --write"
     }
 }

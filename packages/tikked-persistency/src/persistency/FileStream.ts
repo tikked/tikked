@@ -1,13 +1,6 @@
 import { promises as fsPromises, watch as fsWatch } from 'fs';
 import { from, Observable, of } from 'rxjs';
-import {
-  concat,
-  distinctUntilChanged,
-  filter,
-  mergeMap,
-  share,
-  tap
-} from 'rxjs/operators';
+import { concat, distinctUntilChanged, filter, mergeMap, share, tap } from 'rxjs/operators';
 import { validateIsNotEmpty } from 'tikked-core';
 import { DataStream } from '.';
 
@@ -27,10 +20,8 @@ export class FileStream implements DataStream {
   public constructor(
     private filePath: string,
     private _load = (fp: string) => fsPromises.readFile(fp, 'utf8'),
-    private _watch = (fp: string, watcher: (event: string) => void) =>
-      fsWatch(fp, 'utf8', watcher),
-    private _write = (fp: string, content: string) =>
-      fsPromises.writeFile(fp, content, 'utf8')
+    private _watch = (fp: string, watcher: (event: string) => void) => fsWatch(fp, 'utf8', watcher),
+    private _write = (fp: string, content: string) => fsPromises.writeFile(fp, content, 'utf8')
   ) {
     validateIsNotEmpty(filePath);
   }
@@ -41,9 +32,7 @@ export class FileStream implements DataStream {
 
   public read(): Observable<string> {
     return of(1).pipe(
-      concat(
-        this.observeChange().pipe(tap(_ => (this.contentProm = undefined)))
-      ),
+      concat(this.observeChange().pipe(tap(_ => (this.contentProm = undefined)))),
       mergeMap(() => this.observeContent()),
       filter(val => val !== ''),
       distinctUntilChanged()
@@ -52,10 +41,7 @@ export class FileStream implements DataStream {
 
   private observeChange(): Observable<void> {
     return new Observable<void>(observer => {
-      const watchToken = this._watch(
-        this.filePath,
-        event => event === 'change' && observer.next()
-      );
+      const watchToken = this._watch(this.filePath, event => event === 'change' && observer.next());
       return () => watchToken.close();
     }).pipe(share());
   }

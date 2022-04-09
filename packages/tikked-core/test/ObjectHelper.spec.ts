@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { objectMap } from '../src/utility/ObjectHelpers';
 import * as fc from 'fast-check';
+import { objectMap } from '../src/utility/ObjectHelpers';
 
 describe('ObjectHelper', () => {
   describe('objectMap', () => {
@@ -79,7 +79,7 @@ describe('ObjectHelper', () => {
         fc.property(
           fc.dictionary(fc.string(), fc.oneof(fc.string(), fc.integer(), fc.double(), fc.object())),
           data => {
-              let counter = 0;
+            let counter = 0;
             objectMap(data, _ => counter++);
             expect(counter).to.be.equal(Object.keys(data).length);
           }
@@ -89,12 +89,11 @@ describe('ObjectHelper', () => {
   });
 });
 
-function joinObjects(a, b) {
-  return Object.keys(a)
+const joinObjects = (a, b) =>
+  Object.keys(a)
     .concat(Object.keys(b))
     .unique()
     .reduce((result, key) => {
       result[key] = { a: a[key], b: b[key] };
       return result;
     }, {});
-}

@@ -15,7 +15,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
     @httpGet('/:id')
     private index(
         @requestParam('id') id: string,
-        @request() req: express.Request
+            @request() req: express.Request
     ): Promise<ApplicationEnvironment | undefined> {
         const wait = req.query.wait === 'true';
         return firstValueFrom(
@@ -31,7 +31,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
     @httpGet('/:id/feature-set')
     private featureSet(
         @requestParam('id') id: string,
-        @request() req: express.Request
+            @request() req: express.Request
     ): Promise<Iterable<string> | void> {
         const data = Object.entries(req.query)
             .filter(([_, value]) => typeof value === 'string')

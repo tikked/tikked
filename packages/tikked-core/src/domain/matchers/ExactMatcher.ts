@@ -14,8 +14,11 @@ export class ExactMatcher implements ContextMatcher {
    * @param context The context that is to be matched
    */
   public matches(context: Context): boolean {
-    return this.context.Keys.length === context.Keys.length && this.context.Keys.every(
-      key => context.hasKey(key) && this.context.matchKeyValue(key, context.get(key))
+    return (
+      this.context.Keys.length === context.Keys.length &&
+      this.context.Keys.every(
+        key => context.hasKey(key) && this.context.matchKeyValue(key, context.get(key))
+      )
     );
   }
 }

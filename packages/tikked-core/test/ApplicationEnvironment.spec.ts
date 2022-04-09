@@ -1,8 +1,10 @@
+import { expect } from 'chai';
 import { ApplicationEnvironment } from '../src/domain/ApplicationEnvironment';
 import { Context } from '../src/domain/Context';
 import { ContextSchema } from '../src/domain/ContextSchema';
 import { FeatureFlag } from '../src/domain/FeatureFlag';
 import { Toggle } from '../src/domain/Toggle';
+import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 import {
   createAttribute,
   createContextSchema,
@@ -11,8 +13,6 @@ import {
   createId,
   createName
 } from './Fixture';
-import { expect } from 'chai';
-import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 
 describe('ApplicationEnvironment', () => {
   describe('contructor', () => {

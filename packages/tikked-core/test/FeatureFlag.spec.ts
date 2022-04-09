@@ -1,9 +1,9 @@
+import { expect } from 'chai';
 import { Context } from '../src/domain/Context';
 import { FeatureFlag } from '../src/domain/FeatureFlag';
 import { Toggle } from '../src/domain/Toggle';
-import { createDescription, createId, createName, createToggle } from './Fixture';
-import { expect } from 'chai';
 import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
+import { createDescription, createId, createName, createToggle } from './Fixture';
 
 describe('FeatureFlag', () => {
   const defaultId = createId();

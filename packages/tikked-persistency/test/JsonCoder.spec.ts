@@ -181,7 +181,7 @@ describe('JsonCoder', () => {
       const description = createDescription();
       const isActive = true;
       const context = {};
-      const matcher = {"$type":"superset", context}
+      const matcher = { $type: 'superset', context };
       const contextSchema = {
         attributes: []
       };
@@ -322,9 +322,7 @@ describe('JsonCoder', () => {
         const res = runDecoder();
 
         // Assert
-        expect(res.ContextSchema.Attributes[0].Description).to.be.equal(
-          description
-        );
+        expect(res.ContextSchema.Attributes[0].Description).to.be.equal(description);
       });
     });
   });
@@ -335,13 +333,7 @@ describe('JsonCoder', () => {
       const name = createName();
       const description = createDescription();
       const contextSchema = createContextSchema();
-      const appEnv = new ApplicationEnvironment(
-        id,
-        name,
-        description,
-        contextSchema,
-        []
-      );
+      const appEnv = new ApplicationEnvironment(id, name, description, contextSchema, []);
       const decoder = new JsonCoder();
       const runEncode = () => decoder.encode(appEnv);
 

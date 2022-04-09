@@ -44,10 +44,7 @@ export class ApplicationEnvironmentRepository {
     }
   }
 
-  private decodeOrLog(
-    input: string,
-    doThrow: boolean
-  ): ApplicationEnvironment | undefined {
+  private decodeOrLog(input: string, doThrow: boolean): ApplicationEnvironment | undefined {
     try {
       const res = this.coder.decode(input);
       res.toString = () => this.coder.encode(res);

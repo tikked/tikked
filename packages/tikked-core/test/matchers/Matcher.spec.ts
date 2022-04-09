@@ -1,7 +1,7 @@
+import { expect } from 'chai';
 import { Context } from '../../src/domain/Context';
 import { ExactMatcher } from '../../src/domain/matchers/ExactMatcher';
 import { SupersetMatcher } from '../../src/domain/matchers/SupersetMatcher';
-import { expect } from 'chai';
 import { RegexMatcher } from '../../src/domain/matchers/RegexMatcher';
 
 [ExactMatcher, SupersetMatcher, RegexMatcher].forEach(matcherCtor => {
@@ -68,15 +68,13 @@ import { RegexMatcher } from '../../src/domain/matchers/RegexMatcher';
             },
             {
               // eslint-disable-next-line max-len
-              text:
-                'when called with non-matching value in a single key-value context',
+              text: 'when called with non-matching value in a single key-value context',
               context: new Context({ key1: 'value2' }),
               expected: { ExactMatcher: false, SupersetMatcher: false, RegexMatcher: false }
             },
             {
               // eslint-disable-next-line max-len
-              text:
-                'when called with non-matching key in a single key-value context',
+              text: 'when called with non-matching key in a single key-value context',
               context: new Context({ key2: 'value1' }),
               expected: { ExactMatcher: false, SupersetMatcher: false, RegexMatcher: false }
             },
@@ -100,8 +98,7 @@ import { RegexMatcher } from '../../src/domain/matchers/RegexMatcher';
             },
             {
               // eslint-disable-next-line max-len
-              text:
-                'when called with single-key context with one matching key-value',
+              text: 'when called with single-key context with one matching key-value',
               context: new Context({ key1: 'value1' }),
               expected: { ExactMatcher: false, SupersetMatcher: false, RegexMatcher: false }
             },
@@ -119,8 +116,7 @@ import { RegexMatcher } from '../../src/domain/matchers/RegexMatcher';
             },
             {
               // eslint-disable-next-line max-len
-              text:
-                'when called with a tri-key context that matches both, but has extra key-value',
+              text: 'when called with a tri-key context that matches both, but has extra key-value',
               context: new Context({ key1: 'value1', key2: 'value2', key3: 'value3' }),
               expected: { ExactMatcher: false, SupersetMatcher: true, RegexMatcher: true }
             },

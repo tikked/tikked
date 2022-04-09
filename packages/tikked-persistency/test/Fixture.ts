@@ -28,7 +28,8 @@ export const becomesTrue = (condition: () => boolean, frequencyMs = 10, timeoutM
   ]);
 };
 
-export const createFeatureFlag = (id?: string) => new FeatureFlag(id || createId(), createName(), createDescription(), [createToggle()]);
+export const createFeatureFlag = (id?: string) =>
+  new FeatureFlag(id || createId(), createName(), createDescription(), [createToggle()]);
 
 export const createToggle = () => new Toggle(true, new SupersetMatcher(createContext()));
 
@@ -46,11 +47,13 @@ export const createString = () => 'some_string' + stringCounter++;
 let descriptionCounter = 1;
 export const createDescription = () => 'some_desc' + descriptionCounter++;
 
-export const createAttribute = (id?: string) => new Attribute(id || createId(), createName(), createDescription());
+export const createAttribute = (id?: string) =>
+  new Attribute(id || createId(), createName(), createDescription());
 
 export const createContextSchema = (attrs: Attribute[] = []) => new ContextSchema(attrs);
 
-export const createApplicationEnvironment = (id?: string) => new ApplicationEnvironment(
+export const createApplicationEnvironment = (id?: string) =>
+  new ApplicationEnvironment(
     id || createId(),
     createName(),
     createDescription(),

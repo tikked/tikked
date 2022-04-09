@@ -42,6 +42,6 @@ describe('RestApiStream', () => {
     });
   });
   describe('read', () => {
-    //TODO: Implement
+    // TODO: Implement
   });
 });

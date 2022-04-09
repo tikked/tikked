@@ -95,8 +95,8 @@ const mapMatcher = (matcher: { $type: string; context: { [x: string]: string } }
       return new SupersetMatcher(new Context(matcher.context));
     case 'exact':
       return new ExactMatcher(new Context(matcher.context));
-      case 'regex':
-        return new RegexMatcher(new Context(matcher.context));
+    case 'regex':
+      return new RegexMatcher(new Context(matcher.context));
     default:
       throw new Error(`Unknown matcher type: ${matcher.$type}`);
   }

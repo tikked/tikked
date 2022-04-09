@@ -26,7 +26,7 @@
     "test": "mocha",
     "test-watch": "mocha -w --watch-files '**/*.ts'",
     "prepare": "yarn build",
-    "pretty": "prettier-eslint %INIT_CWD%/src/**/*.ts %INIT_CWD%/test/**/*.ts %INIT_CWD%/.*.{ts,js} --write"
+    "pretty": "prettier-eslint ./{src,test}/**/*.{ts,js,json} ./.*.{ts,js,json} --write"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,9 @@
+import { expect } from 'chai';
 import { Context } from '../src/domain/Context';
 import { ContextSchema } from '../src/domain/ContextSchema';
 import { Toggle } from '../src/domain/Toggle';
-import { createAttribute, createId } from './Fixture';
-import { expect } from 'chai';
 import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
+import { createAttribute, createId } from './Fixture';
 
 describe('ContextSchema', () => {
   describe('contructor', () => {
@@ -216,19 +216,19 @@ describe('ContextSchema', () => {
         createAttribute(attributeId2)
       ]);
       it(// tslint:disable-next-line: max-line-length
-      'should return first toggle attribute when given toggles with different attributes', () => {
+        'should return first toggle attribute when given toggles with different attributes', () => {
         // Arrange
-        const context1 = new Context({ [attributeId1]: 'value' });
-        const context2 = new Context({ [attributeId2]: 'value' });
-        const toggle1 = new Toggle(true, new SupersetMatcher(context1));
-        const toggle2 = new Toggle(true, new SupersetMatcher(context2));
+          const context1 = new Context({ [attributeId1]: 'value' });
+          const context2 = new Context({ [attributeId2]: 'value' });
+          const toggle1 = new Toggle(true, new SupersetMatcher(context1));
+          const toggle2 = new Toggle(true, new SupersetMatcher(context2));
 
-        // Act
-        const res = contextSchema.getMostRelevant([toggle1, toggle2]);
+          // Act
+          const res = contextSchema.getMostRelevant([toggle1, toggle2]);
 
-        // Assert
-        expect(res).to.equal(toggle1);
-      });
+          // Assert
+          expect(res).to.equal(toggle1);
+        });
 
       describe('with all four permutations of toggle contexts', () => {
         let contextEmpty: Context;
@@ -294,22 +294,22 @@ describe('ContextSchema', () => {
         createAttribute(attributeId3)
       ]);
       it(// tslint:disable-next-line: max-line-length
-      'should return first toggle when given toggles with different attributes', () => {
+        'should return first toggle when given toggles with different attributes', () => {
         // Arrange
-        const context12 = new Context({
-          [attributeId1]: 'value',
-          [attributeId2]: 'value'
+          const context12 = new Context({
+            [attributeId1]: 'value',
+            [attributeId2]: 'value'
+          });
+          const context3 = new Context({ [attributeId3]: 'value' });
+          const toggle12 = new Toggle(true, new SupersetMatcher(context12));
+          const toggle3 = new Toggle(true, new SupersetMatcher(context3));
+
+          // Act
+          const res = contextSchema.getMostRelevant([toggle3, toggle12]);
+
+          // Assert
+          expect(res).to.equal(toggle3);
         });
-        const context3 = new Context({ [attributeId3]: 'value' });
-        const toggle12 = new Toggle(true, new SupersetMatcher(context12));
-        const toggle3 = new Toggle(true, new SupersetMatcher(context3));
-
-        // Act
-        const res = contextSchema.getMostRelevant([toggle3, toggle12]);
-
-        // Assert
-        expect(res).to.equal(toggle3);
-      });
     });
   });
 });

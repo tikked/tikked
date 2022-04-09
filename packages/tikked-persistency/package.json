@@ -36,7 +36,7 @@
     "lint": "eslint ./src/**",
     "test": "mocha",
     "prepare": "yarn build",
-    "pretty": "prettier-eslint fix"
+    "pretty": "prettier-eslint ./{src,test}/**/*.{ts,js,json} ./.*.{ts,js,json} --write"
   },
   "repository": {
     "type": "git",

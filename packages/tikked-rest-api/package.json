@@ -8,10 +8,9 @@
     "start": "node --require ts-node/register --require source-map-support/register ./server.ts",
     "lint-fix": "eslint --fix ./src/**",
     "lint": "eslint ./src/**",
-    "pretty": "prettier-ts *.ts src/*.ts --write"
+    "pretty": "prettier-eslint ./{src,samples}/**/*.{ts,js,json} ./.*.{ts,js,json} --write"
   },
   "private": true,
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tikked/tikked.git"

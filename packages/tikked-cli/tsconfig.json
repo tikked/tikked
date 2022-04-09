@@ -1,16 +1,7 @@
 {
   "compilerOptions": {
-    "downlevelIteration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": ["es6", "dom"],
-    "module": "commonjs",
-    "moduleResolution": "node",
     "outDir": "dist",
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "es6"
-  }
+    "types": ["mocha", "node"]
+  },
+  "extends": "../../tsconfig.json"
 }

@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "rootDir": "./src",
-    "outDir": "./lib",
+    "rootDir": "src",
+    "outDir": "lib",
     "esModuleInterop": true
   },
+  "extends": "../../tsconfig.json",
   "files": ["./src/index.ts"]
 }

@@ -7,12 +7,12 @@ import { FeatureFlag } from '../src/domain/FeatureFlag';
 import { SupersetMatcher } from '../src/domain/matchers/SupersetMatcher';
 import { Toggle } from '../src/domain/Toggle';
 
-export const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+export const timeout = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const becomesTrue = (condition: () => boolean, frequencyMs = 10, timeoutMs = 1000) => {
   let interval;
   return Promise.race<unknown>([
-    new Promise(resolve => {
+    new Promise((resolve) => {
       interval = setInterval(() => {
         if (condition()) {
           resolve(undefined);

@@ -143,7 +143,7 @@ describe('ApplicationEnvironment', () => {
           text: 'two-attribute context',
           value: new Context({ key1: 'value1', key2: 'value2' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return empty array on input ${data.text}`, () => {
           // Act
           const res = appEnv.getFeatureSet(data.value);
@@ -193,7 +193,7 @@ describe('ApplicationEnvironment', () => {
           value: new Context({ [attribute]: 'some other value' }),
           expected: false
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(data.text, () => {
           // Act
           const res = appEnv.getFeatureSet(data.value);
@@ -247,7 +247,7 @@ describe('ApplicationEnvironment', () => {
           }),
           expected: [featureFlagId2]
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should include ${data.text}`, () => {
           // Act
           const res = appEnv.getFeatureSet(data.value);
@@ -268,7 +268,7 @@ describe('ApplicationEnvironment', () => {
             [attribute2]: 'yet another value'
           })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should not include ${data.text}`, () => {
           // Act
           const res = appEnv.getFeatureSet(data.value);

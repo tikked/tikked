@@ -36,7 +36,7 @@ export class ContextSchema {
    */
   public filterContext(context: Context): Context {
     return new Context(
-      context.Keys.filter(key => this.attributes.some(attr => attr.Id === key)).reduce(
+      context.Keys.filter((key) => this.attributes.some((attr) => attr.Id === key)).reduce(
         (accu, curr) => ({ ...accu, [curr]: context.get(curr) }),
         {}
       )

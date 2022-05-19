@@ -6,7 +6,7 @@ export class RegexMatcher implements ContextMatcher {
   private $type = 'regex';
   private regexMap: RegexMap;
   public constructor(private readonly context: Context) {
-    this.regexMap = objectMap(context.toJSON(), str => new RegExp(str));
+    this.regexMap = objectMap(context.toJSON(), (str) => new RegExp(str));
   }
 
   public get Context() {
@@ -19,7 +19,7 @@ export class RegexMatcher implements ContextMatcher {
    */
   public matches(context: Context): boolean {
     return Object.keys(this.regexMap).every(
-      key =>
+      (key) =>
         context.hasKey(key) &&
         this.regexMap.hasOwnProperty(key) &&
         this.regexMap[key].test(context.get(key))

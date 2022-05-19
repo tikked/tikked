@@ -13,7 +13,7 @@ export const validateIsNotEmpty = <T>(
 };
 
 export const validateUniqueIds = (elems: readonly Identifiable[]) => {
-  const duplicates = elems.map(ff => ff.Id).duplicates();
+  const duplicates = elems.map((ff) => ff.Id).duplicates();
   if (duplicates.length > 0) {
     throw new Error(`Duplicate ids detected: ${duplicates}`);
   }

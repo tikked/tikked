@@ -10,7 +10,7 @@ describe('validateIsNotEmpty', () => {
       { text: 'undefined', value: undefined },
       { text: 'blank string', value: '' },
       { text: 'empty array', value: [] }
-    ].forEach(data => {
+    ].forEach((data) => {
       it(`should throw exception on ${data.text}`, () => {
         expect(() => {
           validateIsNotEmpty(data.value);
@@ -32,7 +32,7 @@ describe('validateIsNotEmpty', () => {
       { text: 'short string', value: 'Hi' },
       { text: 'string with only 0', value: '0' },
       { text: 'long string', value: 'This is a longer string' }
-    ].forEach(data => {
+    ].forEach((data) => {
       it(`should not throw exception on ${data.text}`, () => {
         validateIsNotEmpty(data.value);
       });

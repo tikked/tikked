@@ -2,7 +2,7 @@
 export const envSymbol = Symbol();
 
 export default {
-  install: app => {
+  install: (app) => {
     app.config.globalProperties.$env = serverConfig;
     app.provide(envSymbol, serverConfig);
   }

@@ -17,7 +17,7 @@ export class ExactMatcher implements ContextMatcher {
     return (
       this.context.Keys.length === context.Keys.length &&
       this.context.Keys.every(
-        key => context.hasKey(key) && this.context.matchKeyValue(key, context.get(key))
+        (key) => context.hasKey(key) && this.context.matchKeyValue(key, context.get(key))
       )
     );
   }

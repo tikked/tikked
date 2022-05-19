@@ -47,11 +47,11 @@ export class ApplicationEnvironment implements Identifiable {
    */
   public getFeatureSet(context: Context): FeatureSet {
     const filteredContext = this.contextSchema.filterContext(context);
-    const activeFeatureFlags = this.featureFlags.filter(ff => {
+    const activeFeatureFlags = this.featureFlags.filter((ff) => {
       const toggles = ff.getToggles(filteredContext);
       return toggles.length > 0 && this.contextSchema.getMostRelevant(toggles).IsActive;
     });
-    return new Set<string>(activeFeatureFlags.map(ff => ff.Id));
+    return new Set<string>(activeFeatureFlags.map((ff) => ff.Id));
   }
 }
 

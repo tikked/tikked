@@ -32,16 +32,19 @@ export class FileStream implements DataStream {
 
   public read(): Observable<string> {
     return of(1).pipe(
-      concat(this.observeChange().pipe(tap(_ => (this.contentProm = undefined)))),
+      concat(this.observeChange().pipe(tap((_) => (this.contentProm = undefined)))),
       mergeMap(() => this.observeContent()),
-      filter(val => val !== ''),
+      filter((val) => val !== ''),
       distinctUntilChanged()
     );
   }
 
   private observeChange(): Observable<void> {
-    return new Observable<void>(observer => {
-      const watchToken = this._watch(this.filePath, event => event === 'change' && observer.next());
+    return new Observable<void>((observer) => {
+      const watchToken = this._watch(
+        this.filePath,
+        (event) => event === 'change' && observer.next()
+      );
       return () => watchToken.close();
     }).pipe(share());
   }
@@ -49,7 +52,7 @@ export class FileStream implements DataStream {
   private observeContent(): Observable<string> {
     if (!this.contentProm) {
       this.contentProm = this._load(this.filePath);
-      this.contentProm.catch(err => {
+      this.contentProm.catch((err) => {
         this.contentProm = undefined;
       });
     }

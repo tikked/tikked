@@ -57,11 +57,11 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
     const parsed = JSON.parse(input);
     const decoded = JsonCoder.applicationEnvironmentDecoder.decode(parsed);
     const res = decoded.fold(
-      errors => {
+      (errors) => {
         const messages = reporter(decoded);
         throw new Error(messages.join('\n'));
       },
-      value => value
+      (value) => value
     );
     return new ApplicationEnvironment(
       res.id,
@@ -69,16 +69,16 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
       res.description,
       new ContextSchema(
         res.contextSchema.attributes.map(
-          attr => new Attribute(attr.id, attr.name, attr.description)
+          (attr) => new Attribute(attr.id, attr.name, attr.description)
         )
       ),
       res.featureFlags.map(
-        ff =>
+        (ff) =>
           new FeatureFlag(
             ff.id,
             ff.name,
             ff.description,
-            ff.toggles.map(tog => new Toggle(tog.isActive, mapMatcher(tog.matcher)))
+            ff.toggles.map((tog) => new Toggle(tog.isActive, mapMatcher(tog.matcher)))
           )
       )
     );

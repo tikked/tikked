@@ -39,7 +39,7 @@ export class FeatureFlag implements Identifiable {
    * @param context The context for which to fetch toggles
    */
   public getToggles(context: Context) {
-    return this.toggles.filter(tog => tog.matches(context));
+    return this.toggles.filter((tog) => tog.matches(context));
   }
 
   private validateToggles(toggles: Toggle[]) {

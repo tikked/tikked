@@ -419,7 +419,7 @@ describe('JsonCoder', () => {
           [createFeatureFlag(), createFeatureFlag(), createFeatureFlag()]
         )
       }
-    ].forEach(data => {
+    ].forEach((data) => {
       describe(data.text, () => {
         it('should mirror', () => {
           // Arrange

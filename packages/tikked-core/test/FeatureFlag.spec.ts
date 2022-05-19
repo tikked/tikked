@@ -70,7 +70,7 @@ describe('FeatureFlag', () => {
           text: 'mismatched value context',
           value: new Context({ key: 'value1' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return empty array on input ${data.text}`, () => {
           // Act
           const res = featureFlag.getToggles(data.value);
@@ -89,7 +89,7 @@ describe('FeatureFlag', () => {
           text: 'matching context with extra',
           value: new Context({ ...contextData, k: 'l' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return toggle on input ${data.text}`, () => {
           // Act
           const res = featureFlag.getToggles(data.value);
@@ -123,7 +123,7 @@ describe('FeatureFlag', () => {
           text: 'mismatched value context',
           value: new Context({ key1: 'wrong value' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return empty array on input ${data.text}`, () => {
           // Act
           const res = featureFlag.getToggles(data.value);
@@ -142,7 +142,7 @@ describe('FeatureFlag', () => {
           text: 'matching context with extra',
           value: new Context({ ...contextData1, k: 'l' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return first toggle on input ${data.text}`, () => {
           // Act
           const res = featureFlag.getToggles(data.value);
@@ -162,7 +162,7 @@ describe('FeatureFlag', () => {
           text: 'matching context with extra',
           value: new Context({ ...contextData2, k: 'l' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return second toggle on input ${data.text}`, () => {
           // Act
           const res = featureFlag.getToggles(data.value);
@@ -183,7 +183,7 @@ describe('FeatureFlag', () => {
           text: 'matching context with extra',
           value: new Context({ ...contextDataCombined, k: 'l' })
         }
-      ].forEach(data => {
+      ].forEach((data) => {
         it(`should return both toggles on input ${data.text}`, () => {
           // Act
           const res = featureFlag.getToggles(data.value);

@@ -27,9 +27,9 @@ export class RestApiStream implements DataStream {
     if (!this.obs) {
       this.obs = concat(
         from(this.applicationEnvironment()),
-        timer(0, 1).pipe(concatMap(_ => from(this.applicationEnvironmentWait())))
+        timer(0, 1).pipe(concatMap((_) => from(this.applicationEnvironmentWait())))
       ).pipe(
-        retryWhen(errors => errors.pipe(delay(5000))),
+        retryWhen((errors) => errors.pipe(delay(5000))),
         shareReplay(1)
       );
     }
@@ -41,9 +41,7 @@ export class RestApiStream implements DataStream {
   }
 
   private async applicationEnvironmentWait(): Promise<string> {
-    return JSON.stringify(
-      (await axios.get<string>(this.url, { params: { wait: 'true' } })).data
-    );
+    return JSON.stringify((await axios.get<string>(this.url, { params: { wait: 'true' } })).data);
   }
 }
 

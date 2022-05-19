@@ -57,21 +57,21 @@ describe('FileStream', () => {
         afterEach(() => {
           sub.unsubscribe();
         });
-        it('should trigger content of file to be read', done => {
+        it('should trigger content of file to be read', (done) => {
           setTimeout(() => {
             expect(load).to.be.calledOnce;
             expect(load).to.be.calledOnceWith(fileName);
             done();
           });
         });
-        it('should trigger subscribed observable', done => {
+        it('should trigger subscribed observable', (done) => {
           setTimeout(() => {
             expect(next).to.be.calledOnce;
             expect(next).to.be.calledOnceWith(fileContent);
             done();
           });
         });
-        it('should not trigger error/completed on subscribed observable', done => {
+        it('should not trigger error/completed on subscribed observable', (done) => {
           setTimeout(() => {
             expect(error).to.not.be.called;
             expect(complete).to.not.be.called;
@@ -90,21 +90,21 @@ describe('FileStream', () => {
           sub1.unsubscribe();
           sub2.unsubscribe();
         });
-        it('should only read file once', done => {
+        it('should only read file once', (done) => {
           setTimeout(() => {
             expect(load).to.be.calledOnce;
             expect(load).to.be.calledOnceWith(fileName);
             done();
           });
         });
-        it('should trigger subscribed observable multiple times', done => {
+        it('should trigger subscribed observable multiple times', (done) => {
           setTimeout(() => {
             expect(next).to.be.calledTwice;
             expect(next).to.be.calledWith(fileContent);
             done();
           });
         });
-        it('should not trigger error/completed on subscribed observable', done => {
+        it('should not trigger error/completed on subscribed observable', (done) => {
           setTimeout(() => {
             expect(error).to.not.be.called;
             expect(complete).to.not.be.called;
@@ -125,14 +125,14 @@ describe('FileStream', () => {
         afterEach(() => {
           sub.unsubscribe();
         });
-        it('should trigger reload of file', done => {
+        it('should trigger reload of file', (done) => {
           setTimeout(() => {
             expect(load).to.be.calledTwice;
             expect(load.alwaysCalledWith(fileName)).to.be.true;
             done();
           });
         });
-        it('should trigger subscribed observable with the new content after the old', done => {
+        it('should trigger subscribed observable with the new content after the old', (done) => {
           setTimeout(() => {
             expect(next).to.be.calledTwice;
             expect(next.getCall(0).args[0]).to.be.equal(fileContent);
@@ -171,9 +171,9 @@ describe('FileStream', () => {
         beforeEach(() => {
           observable = stream.read();
         });
-        it('should get back the file content through observable', done => {
+        it('should get back the file content through observable', (done) => {
           const sub = observable.subscribe({
-            next: val => {
+            next: (val) => {
               expect(val).to.be.equal(fileContent);
               sub.unsubscribe();
               done();

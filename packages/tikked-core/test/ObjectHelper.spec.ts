@@ -8,8 +8,8 @@ describe('ObjectHelper', () => {
       fc.assert(
         fc.property(
           fc.dictionary(fc.string(), fc.oneof(fc.string(), fc.integer(), fc.double(), fc.object())),
-          data => {
-            const res = objectMap(data, x => x);
+          (data) => {
+            const res = objectMap(data, (x) => x);
             expect(res).to.be.deep.equal(data);
           }
         )
@@ -29,19 +29,19 @@ describe('ObjectHelper', () => {
     });
     it('should always be different when mapper appends', () => {
       fc.assert(
-        fc.property(fc.dictionary(fc.string(), fc.string()), data => {
-          const res = objectMap(data, x => x + '1');
+        fc.property(fc.dictionary(fc.string(), fc.string()), (data) => {
+          const res = objectMap(data, (x) => x + '1');
           const joined = joinObjects(res, data);
-          Object.keys(joined).map(key => expect(joined[key].a).to.not.be.equal(joined[key].b));
+          Object.keys(joined).map((key) => expect(joined[key].a).to.not.be.equal(joined[key].b));
         })
       );
     });
     it('should always be equal when double negating numbers', () => {
       fc.assert(
-        fc.property(fc.dictionary(fc.string(), fc.double()), data => {
+        fc.property(fc.dictionary(fc.string(), fc.double()), (data) => {
           const res = objectMap(
-            objectMap(data, x => -x),
-            x => -x
+            objectMap(data, (x) => -x),
+            (x) => -x
           );
           expect(res).to.be.deep.equal(data);
         })
@@ -63,10 +63,10 @@ describe('ObjectHelper', () => {
     it('should always throw when mapper throws and input contains keys', () => {
       fc.assert(
         fc.property(
-          fc.dictionary(fc.string(), fc.string()).filter(data => Object.keys(data).length > 0),
-          data => {
+          fc.dictionary(fc.string(), fc.string()).filter((data) => Object.keys(data).length > 0),
+          (data) => {
             expect(() =>
-              objectMap(data, _ => {
+              objectMap(data, (_) => {
                 throw new Error('Match this!');
               })
             ).to.throw('Match this!');
@@ -78,9 +78,9 @@ describe('ObjectHelper', () => {
       fc.assert(
         fc.property(
           fc.dictionary(fc.string(), fc.oneof(fc.string(), fc.integer(), fc.double(), fc.object())),
-          data => {
+          (data) => {
             let counter = 0;
-            objectMap(data, _ => counter++);
+            objectMap(data, (_) => counter++);
             expect(counter).to.be.equal(Object.keys(data).length);
           }
         )

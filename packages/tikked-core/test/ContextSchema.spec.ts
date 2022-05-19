@@ -84,7 +84,7 @@ describe('ContextSchema', () => {
 
     describe('with no attributes', () => {
       const schema = new ContextSchema([]);
-      testData.forEach(data => {
+      testData.forEach((data) => {
         it(`should return empty context on ${data.text}`, () => {
           // Act
           const res = schema.filterContext(data.value);
@@ -97,7 +97,7 @@ describe('ContextSchema', () => {
 
     describe('with single attribute', () => {
       const schema = new ContextSchema([createAttribute('key1')]);
-      testData.slice(0, 1).forEach(data => {
+      testData.slice(0, 1).forEach((data) => {
         it(`should return empty context on ${data.text}`, () => {
           // Act
           const res = schema.filterContext(data.value);
@@ -106,7 +106,7 @@ describe('ContextSchema', () => {
           expect(res.Keys).to.be.empty;
         });
       });
-      testData.slice(1).forEach(data => {
+      testData.slice(1).forEach((data) => {
         it(`should return stripped context on ${data.text}`, () => {
           // Act
           const res = schema.filterContext(data.value);
@@ -120,7 +120,7 @@ describe('ContextSchema', () => {
 
     describe('with multiple attribute', () => {
       const schema = new ContextSchema([createAttribute('key1'), createAttribute('key2')]);
-      testData.slice(0, 1).forEach(data => {
+      testData.slice(0, 1).forEach((data) => {
         it(`should return empty context on ${data.text}`, () => {
           // Act
           const res = schema.filterContext(data.value);
@@ -129,7 +129,7 @@ describe('ContextSchema', () => {
           expect(res.Keys).to.be.empty;
         });
       });
-      testData.slice(1, 2).forEach(data => {
+      testData.slice(1, 2).forEach((data) => {
         it(`should return full context on ${data.text}`, () => {
           // Act
           const res = schema.filterContext(data.value);
@@ -138,7 +138,7 @@ describe('ContextSchema', () => {
           expect(res.Keys).to.eql(['key1']);
         });
       });
-      testData.slice(2).forEach(data => {
+      testData.slice(2).forEach((data) => {
         it(`should return full context on ${data.text}`, () => {
           // Act
           const res = schema.filterContext(data.value);
@@ -216,19 +216,19 @@ describe('ContextSchema', () => {
         createAttribute(attributeId2)
       ]);
       it(// tslint:disable-next-line: max-line-length
-        'should return first toggle attribute when given toggles with different attributes', () => {
+      'should return first toggle attribute when given toggles with different attributes', () => {
         // Arrange
-          const context1 = new Context({ [attributeId1]: 'value' });
-          const context2 = new Context({ [attributeId2]: 'value' });
-          const toggle1 = new Toggle(true, new SupersetMatcher(context1));
-          const toggle2 = new Toggle(true, new SupersetMatcher(context2));
+        const context1 = new Context({ [attributeId1]: 'value' });
+        const context2 = new Context({ [attributeId2]: 'value' });
+        const toggle1 = new Toggle(true, new SupersetMatcher(context1));
+        const toggle2 = new Toggle(true, new SupersetMatcher(context2));
 
-          // Act
-          const res = contextSchema.getMostRelevant([toggle1, toggle2]);
+        // Act
+        const res = contextSchema.getMostRelevant([toggle1, toggle2]);
 
-          // Assert
-          expect(res).to.equal(toggle1);
-        });
+        // Assert
+        expect(res).to.equal(toggle1);
+      });
 
       describe('with all four permutations of toggle contexts', () => {
         let contextEmpty: Context;
@@ -270,7 +270,7 @@ describe('ContextSchema', () => {
             msg: 'with attribute 2 context first',
             data: () => [toggle2, toggle12, toggleEmpty, toggle1]
           }
-        ].forEach(element => {
+        ].forEach((element) => {
           describe(element.msg, () => {
             it('should return toggle with both attributes when given all combination of toggle contexts', () => {
               // Act
@@ -294,22 +294,22 @@ describe('ContextSchema', () => {
         createAttribute(attributeId3)
       ]);
       it(// tslint:disable-next-line: max-line-length
-        'should return first toggle when given toggles with different attributes', () => {
+      'should return first toggle when given toggles with different attributes', () => {
         // Arrange
-          const context12 = new Context({
-            [attributeId1]: 'value',
-            [attributeId2]: 'value'
-          });
-          const context3 = new Context({ [attributeId3]: 'value' });
-          const toggle12 = new Toggle(true, new SupersetMatcher(context12));
-          const toggle3 = new Toggle(true, new SupersetMatcher(context3));
-
-          // Act
-          const res = contextSchema.getMostRelevant([toggle3, toggle12]);
-
-          // Assert
-          expect(res).to.equal(toggle3);
+        const context12 = new Context({
+          [attributeId1]: 'value',
+          [attributeId2]: 'value'
         });
+        const context3 = new Context({ [attributeId3]: 'value' });
+        const toggle12 = new Toggle(true, new SupersetMatcher(context12));
+        const toggle3 = new Toggle(true, new SupersetMatcher(context3));
+
+        // Act
+        const res = contextSchema.getMostRelevant([toggle3, toggle12]);
+
+        // Assert
+        expect(res).to.equal(toggle3);
+      });
     });
   });
 });

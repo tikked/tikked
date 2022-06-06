@@ -181,7 +181,7 @@ describe('JsonCoder', () => {
       const description = createDescription();
       const isActive = true;
       const context = {};
-      const matcher = { $type: 'superset', context };
+      const matcher = { $superset: context };
       const contextSchema = {
         attributes: []
       };

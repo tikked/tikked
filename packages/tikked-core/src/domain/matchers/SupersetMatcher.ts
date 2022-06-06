@@ -2,7 +2,7 @@ import { Context } from '../Context';
 import { ContextMatcher } from './Matcher';
 
 export class SupersetMatcher implements ContextMatcher {
-  private $type = 'superset';
+  public readonly $type = '$superset';
   public constructor(private context: Context) {}
 
   public get Context() {

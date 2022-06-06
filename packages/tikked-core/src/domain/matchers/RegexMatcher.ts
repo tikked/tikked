@@ -3,7 +3,7 @@ import { Context } from '../Context';
 import { ContextMatcher } from './Matcher';
 
 export class RegexMatcher implements ContextMatcher {
-  private $type = 'regex';
+  public readonly $type = '$regex';
   private regexMap: RegexMap;
   public constructor(private readonly context: Context) {
     this.regexMap = objectMap(context.toJSON(), (str) => new RegExp(str));

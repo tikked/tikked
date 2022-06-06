@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node --require ts-node/register --require source-map-support/register ./server.ts",
-    "lint-fix": "eslint --fix ./src/**",
-    "lint": "eslint ./src/**",
+    "lint-fix": "eslint --fix ./src/** ./*.{ts,js,json}",
+    "lint": "eslint ./src/** ./*.{ts,js,json}",
     "pretty": "prettier-eslint ./{src,samples}/**/*.{ts,js,json} ./.*.{ts,js,json} --write"
   },
   "private": true,

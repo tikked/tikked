@@ -3,8 +3,8 @@ const start = Date.now();
 // tslint:disable-next-line: ordered-imports
 import 'reflect-metadata';
 // tslint:disable-next-line: ordered-imports
-import bodyParser from 'body-parser';
-import cors from 'cors';
+import {json, urlencoded} from 'body-parser';
+import * as cors from 'cors';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { createContainer } from './inversify.config';
 
@@ -18,11 +18,11 @@ const server = new InversifyExpressServer(container);
 server.setConfig(app => {
     // add body parser
     app.use(
-        bodyParser.urlencoded({
+        urlencoded({
             extended: true
         })
     );
-    app.use(bodyParser.json());
+    app.use(json());
     app.use(cors());
 });
 

@@ -11,7 +11,7 @@ import { createContainer } from './inversify.config';
 // declare metadata by @controller annotation
 import './src/controllers/ApplicationEnvironmentController';
 
-const container = createContainer('samples');
+const container = createContainer('../../samples');
 
 // create server
 const server = new InversifyExpressServer(container);

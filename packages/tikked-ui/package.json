@@ -40,12 +40,12 @@
     "not dead"
   ],
   "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "autoprefixer": "^10.3.7",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.19.1",
-    "vite": "^2.6.3",
-    "@vitejs/plugin-vue": "^1.9.3",
+    "postcss": "^8.3.9",
     "tailwindcss": "^2.2.16",
-    "autoprefixer": "^10.3.7",
-    "postcss": "^8.3.9"
+    "vite": "^2.6.3"
   }
 }

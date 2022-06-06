@@ -35,6 +35,7 @@
         "eslint-plugin-prefer-arrow-functions": "^3.1.4",
         "eslint-plugin-vue": "^8.6.0",
         "lerna": "^4.0.0",
+        "lerna-update-wizard": "^1.1.2",
         "link-parent-bin": "^2.0.0",
         "mocha": "^9.2.2",
         "nyc": "^15.1.0",
@@ -54,10 +55,11 @@
     },
     "private": true,
     "scripts": {
+        "lerna": "lerna",
         "test": "lerna run test",
         "build": "lerna bootstrap",
         "postinstall": "link-parent-bin",
-        "clean": "rimraf packages/*/node_modules node_modules",
+        "clean": "lerna clean",
         "pretty": "prettier-eslint ./packages/*/{src,test,samples}/**/*.{ts,js,json} ./packages/*/.*.{ts,js,json} --write",
         "audit-all": "lerna exec -- yarn audit --groups dependencies"
     }

@@ -7,7 +7,7 @@
     "watch": "nodemon --watch . --watch ../tikked-ui"
   },
   "dependencies": {
-    "express": "~4.16.1"
+    "express": "4.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

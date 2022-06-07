@@ -55,6 +55,9 @@
         "typescript": "^4.7.3"
     },
     "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "lerna": "lerna",
         "test": "lerna run test",

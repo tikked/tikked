@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "typeRoots": ["../../node_modules/@types"],
-    "types": ["inversify", "reflect-metadata", "node", "mocha"]
+    "types": ["inversify", "reflect-metadata", "node", "mocha", "chai", "chai-http"]
   },
   "extends": "../../tsconfig.json"
 }

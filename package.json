@@ -4,7 +4,7 @@
     "repository": "https://github.com/tikked/tikked.git",
     "license": "MIT",
     "devDependencies": {
-        "@types/chai": "^4.1.7",
+        "@types/chai": "^4.3.1",
         "@types/chai-as-promised": "^7.1.0",
         "@types/command-line-args": "^5.0.0",
         "@types/command-line-usage": "^5.0.1",
@@ -26,6 +26,7 @@
         "babel-eslint": "^10.1.0",
         "chai": "^4.3.6",
         "chai-as-promised": "^7.1.1",
+        "chai-http": "^4.3.0",
         "cloc": "^2.9.0",
         "eslint": "^8.15.0",
         "eslint-config-prettier": "^8.5.0",

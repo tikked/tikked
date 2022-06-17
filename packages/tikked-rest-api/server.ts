@@ -13,10 +13,8 @@ import './src/controllers/ApplicationEnvironmentController';
 
 const container = createContainer('../../samples');
 
-// create server
 const server = new InversifyExpressServer(container);
 server.setConfig(app => {
-    // add body parser
     app.use(
         urlencoded({
             extended: true

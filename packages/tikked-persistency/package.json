@@ -1,5 +1,5 @@
 {
-  "name": "tikked-persistency",
+  "name": "@tikked/persistency",
   "version": "0.0.1",
   "description": "A feature flag thingy",
   "main": "dist/src/index.js",
@@ -11,7 +11,7 @@
     "io-ts-reporters": "0.0.21",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.1.0",
-    "tikked-core": "0.0.1"
+    "@tikked/core": "0.0.1"
   },
   "private": true,
   "nyc": {

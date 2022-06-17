@@ -1,5 +1,5 @@
 {
-  "name": "tikked-rest-api",
+  "name": "@tikked/rest-api",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -29,7 +29,7 @@
     "inversify-express-utils": "^6.3.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.1.0",
-    "tikked-core": "0.0.1",
-    "tikked-persistency": "0.0.1"
+    "@tikked/core": "0.0.1",
+    "@tikked/persistency": "0.0.1"
   }
 }

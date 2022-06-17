@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { ApplicationEnvironment, ContextMatcher } from 'tikked-core';
+import { ApplicationEnvironment, ContextMatcher } from '@tikked/core';
 import { JsonCoder } from '../src/persistency/JsonCoder';
 import {
   createAttribute,

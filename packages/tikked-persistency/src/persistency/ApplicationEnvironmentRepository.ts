@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { Observable, throwError } from 'rxjs';
 import { filter, map, shareReplay } from 'rxjs/operators';
-import { ApplicationEnvironment } from 'tikked-core';
+import { ApplicationEnvironment } from '@tikked/core';
 import { TYPES } from '../types';
 import { Coder, StreamFactory } from '.';
 

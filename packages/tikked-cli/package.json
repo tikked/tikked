@@ -1,5 +1,5 @@
 {
-  "name": "tikked-cli",
+  "name": "@tikked/cli",
   "version": "0.0.1",
   "description": "",
   "main": "index.ts",
@@ -27,7 +27,7 @@
     "command-line-usage": "^6.0.1",
     "inversify": "6.0.1",
     "reflect-metadata": "^0.1.13",
-    "tikked-core": "0.0.1",
-    "tikked-persistency": "0.0.1"
+    "@tikked/core": "0.0.1",
+    "@tikked/persistency": "0.0.1"
   }
 }

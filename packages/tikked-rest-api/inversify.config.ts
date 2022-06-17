@@ -6,7 +6,7 @@ import {
     JsonCoder,
     StreamFactory,
     TYPES
-} from 'tikked-persistency';
+} from '@tikked/persistency';
 import { Container } from 'inversify';
 import { join } from 'path';
 

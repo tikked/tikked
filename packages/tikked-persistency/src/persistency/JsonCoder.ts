@@ -11,7 +11,7 @@ import {
   RegexMatcher,
   ExactMatcher,
   Toggle
-} from 'tikked-core';
+} from '@tikked/core';
 import { Decoder, Encoder } from '.';
 
 @injectable()

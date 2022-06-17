@@ -1,6 +1,6 @@
 import * as express from 'express';
-import { ApplicationEnvironment, Context } from 'tikked-core';
-import { ApplicationEnvironmentRepository } from 'tikked-persistency';
+import { ApplicationEnvironment, Context } from '@tikked/core';
+import { ApplicationEnvironmentRepository } from '@tikked/persistency';
 import { inject } from 'inversify';
 import { controller, httpGet, interfaces, request, requestParam } from 'inversify-express-utils';
 import { distinctUntilChanged, map, skip, take, timeout } from 'rxjs/operators';

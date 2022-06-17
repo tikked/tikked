@@ -117,7 +117,7 @@ export class JsonCoder implements Encoder<string>, Decoder<string> {
   }
 }
 
-const encodeMatcher = (matcher: Matcher) => {
+export function encodeMatcher(matcher: Matcher) {
   switch (matcher.$type) {
     case '$superset':
     case '$exact':
@@ -140,9 +140,9 @@ const encodeMatcher = (matcher: Matcher) => {
     default:
       throw new Error(`Unknown matcher type: ${matcher.$type}`);
   }
-};
+}
 
-const decodeMatcher = (matcher: UnmappedMatcher) => {
+export function decodeMatcher(matcher: UnmappedMatcher) {
   const entries = Object.entries(matcher);
 
   const matcherFactory = {
@@ -165,4 +165,4 @@ const decodeMatcher = (matcher: UnmappedMatcher) => {
   }
 
   throw new Error(`Unknown matcher type(s): ${Object.keys(matcher).join(', ')}`);
-};
+}

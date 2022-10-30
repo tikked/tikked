@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { Observable, throwError } from 'rxjs';
 import { filter, map, shareReplay } from 'rxjs/operators';
-import { ApplicationEnvironment } from 'tikked-core';
+import { ApplicationEnvironment } from '@tikked/core';
 import { TYPES } from '../types';
 import { Coder, StreamFactory } from '.';
 
@@ -36,11 +36,10 @@ export class ApplicationEnvironmentRepository {
         .read()
         .pipe(
           map((x, i) => this.decodeOrLog(x, i === 0)),
-          filter<ApplicationEnvironment>((x) => x !== undefined),
-          shareReplay(1)
+          filter<ApplicationEnvironment>((x) => x !== undefined)
         );
     } catch (err) {
-      return throwError(err);
+      return throwError(() => err);
     }
   }
 

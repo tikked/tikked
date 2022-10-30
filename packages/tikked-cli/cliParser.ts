@@ -1,6 +1,6 @@
 import * as commandLineArgs from 'command-line-args';
 import * as commandLineUsage from 'command-line-usage';
-import { Context } from 'tikked-core';
+import { Context } from '@tikked/core';
 
 const contextJson = (input: string) => new Context(JSON.parse(input));
 const optionDefinitions = [

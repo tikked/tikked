@@ -1,7 +1,7 @@
 import { promises as fsPromises, watch as fsWatch } from 'fs';
 import { from, Observable, of } from 'rxjs';
 import { concat, distinctUntilChanged, filter, mergeMap, share, tap } from 'rxjs/operators';
-import { validateIsNotEmpty } from 'tikked-core';
+import { validateIsNotEmpty } from '@tikked/core';
 import { DataStream } from '.';
 
 export class FileStream implements DataStream {

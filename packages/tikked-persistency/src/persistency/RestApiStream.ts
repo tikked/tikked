@@ -1,6 +1,6 @@
 import { concat, from, Observable, timer } from 'rxjs';
 import { concatMap, retryWhen, shareReplay, delay } from 'rxjs/operators';
-import { validateIsNotEmpty } from 'tikked-core';
+import { validateIsNotEmpty } from '@tikked/core';
 import axios from 'axios';
 import { DataStream } from '.';
 

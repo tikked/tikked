@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { Context } from 'tikked-core';
-import { ApplicationEnvironmentRepository } from 'tikked-persistency';
+import { Context } from '@tikked/core';
+import { ApplicationEnvironmentRepository } from '@tikked/persistency';
 import { parseCliArgs, showCliHelp } from './cliParser';
 import { createContainer, createContainerRest } from './inversify.config';
 import { combineLatest, Observable } from 'rxjs';

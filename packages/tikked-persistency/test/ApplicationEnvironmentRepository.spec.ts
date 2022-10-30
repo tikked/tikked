@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { SinonStub, stub } from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import * as sinon from 'ts-sinon';
-import { ApplicationEnvironment } from 'tikked-core';
+import { ApplicationEnvironment } from '@tikked/core';
 import { Coder, DataStream, StreamFactory } from '../src/persistency';
 import { ApplicationEnvironmentRepository } from '../src/persistency/ApplicationEnvironmentRepository';
 import { createApplicationEnvironment, createId } from './Fixture';

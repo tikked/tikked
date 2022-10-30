@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "typeRoots": ["./node_modules/@types", "./typings"],
+    "typeRoots": ["../../node_modules/@types", "./typings"],
     "types": ["mocha", "node"]
   },
   "extends": "../../tsconfig.json"

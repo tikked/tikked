@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ApplicationEnvironment } from 'tikked-core';
+import { ApplicationEnvironment } from '@tikked/core';
 
 export interface Encoder<T> {
   encode(appEnv: ApplicationEnvironment): T;

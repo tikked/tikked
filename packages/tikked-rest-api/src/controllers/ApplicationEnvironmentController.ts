@@ -1,6 +1,6 @@
 import * as express from 'express';
-import { ApplicationEnvironment, Context } from 'tikked-core';
-import { ApplicationEnvironmentRepository } from 'tikked-persistency';
+import { ApplicationEnvironment, Context } from '@tikked/core';
+import { ApplicationEnvironmentRepository } from '@tikked/persistency';
 import { inject } from 'inversify';
 import { controller, httpGet, interfaces, request, requestParam } from 'inversify-express-utils';
 import { distinctUntilChanged, map, skip, take, timeout } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
   private index(
     @requestParam('id') id: string,
     @request() req: express.Request
-  ): Promise<ApplicationEnvironment | undefined> {
+  ): Promise<ApplicationEnvironment | undefined | void> {
     const wait = req.query.wait === 'true';
     return firstValueFrom(
       this.repo.get(id).pipe(
@@ -25,7 +25,11 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
         wait ? timeout(60000) : map((x) => x),
         take(1)
       )
-    );
+    ).catch((err) => {
+      if (!wait) {
+        throw err;
+      }
+    });
   }
 
   @httpGet('/:id/feature-set')
@@ -38,7 +42,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
       .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {});
     const context = new Context(data);
     const wait = req.query.wait === 'true';
-    return this.repo
+    return firstValueFrom(this.repo
       .get(id)
       .pipe(
         map((appEnv) => appEnv.getFeatureSet(context)),
@@ -47,8 +51,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
         wait ? timeout(60000) : map((x) => x),
         take(1),
         map((x) => [...x])
-      )
-      .toPromise()
+      ))
       .catch((err) => {
         if (!wait) {
           throw err;

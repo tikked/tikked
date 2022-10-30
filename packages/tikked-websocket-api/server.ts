@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { combineLatest, Observable } from 'rxjs';
-import { Context } from 'tikked-core/dist/src/domain';
-import { ApplicationEnvironmentRepository } from 'tikked-persistency';
+import { Context } from '@tikked/core/dist/src/domain';
+import { ApplicationEnvironmentRepository } from '@tikked/persistency';
 import * as WebSocket from 'ws';
 import { Server } from 'ws';
 import { createContainer } from './inversify.config';

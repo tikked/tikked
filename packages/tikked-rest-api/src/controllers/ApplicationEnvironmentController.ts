@@ -16,7 +16,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
   private index(
     @requestParam('id') id: string,
     @request() req: express.Request
-  ): Promise<ApplicationEnvironment | undefined> {
+  ): Promise<ApplicationEnvironment | undefined | void> {
     const wait = req.query.wait === 'true';
     return firstValueFrom(
       this.repo.get(id).pipe(
@@ -25,7 +25,11 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
         wait ? timeout(60000) : map((x) => x),
         take(1)
       )
-    );
+    ).catch((err) => {
+      if (!wait) {
+        throw err;
+      }
+    });
   }
 
   @httpGet('/:id/feature-set')

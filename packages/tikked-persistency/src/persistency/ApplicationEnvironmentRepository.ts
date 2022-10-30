@@ -36,11 +36,10 @@ export class ApplicationEnvironmentRepository {
         .read()
         .pipe(
           map((x, i) => this.decodeOrLog(x, i === 0)),
-          filter<ApplicationEnvironment>((x) => x !== undefined),
-          shareReplay(1)
+          filter<ApplicationEnvironment>((x) => x !== undefined)
         );
     } catch (err) {
-      return throwError(err);
+      return throwError(() => err);
     }
   }
 

@@ -42,7 +42,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
       .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {});
     const context = new Context(data);
     const wait = req.query.wait === 'true';
-    return this.repo
+    return firstValueFrom(this.repo
       .get(id)
       .pipe(
         map((appEnv) => appEnv.getFeatureSet(context)),
@@ -51,8 +51,7 @@ export class ApplicationEnvironmentController implements interfaces.Controller {
         wait ? timeout(60000) : map((x) => x),
         take(1),
         map((x) => [...x])
-      )
-      .toPromise()
+      ))
       .catch((err) => {
         if (!wait) {
           throw err;

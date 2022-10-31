@@ -1,17 +1,17 @@
 import { expect, use as chaiUse } from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as sinonChai from 'sinon-chai';
-import { RestApiStream } from '../src/persistency/RestApiStream';
+import { WebsocketApiStream } from '../src/persistency/WebsocketApiStream';
 chaiUse(sinonChai);
 chaiUse(chaiAsPromised);
 
-describe('RestApiStream', () => {
+describe('WebsocketApiStream', () => {
   describe('constructor', () => {
     context('when called with empty url argument', () => {
       it('should throw an error', () => {
         // Act
         expect(() => {
-          const res = new RestApiStream('');
+          const res = new WebsocketApiStream('');
         })
           // Assert
           .to.throw('empty');
@@ -22,7 +22,7 @@ describe('RestApiStream', () => {
       it('should throw an error', () => {
         // Act
         expect(() => {
-          const res = new RestApiStream('this is not a url');
+          const res = new WebsocketApiStream('this is not a url');
         })
           // Assert
           .to.throw('URL');
@@ -33,7 +33,7 @@ describe('RestApiStream', () => {
       it('should throw an error', () => {
         // Act
         expect(() => {
-          const res = new RestApiStream('http://localhost');
+          const res = new WebsocketApiStream('ws://localhost');
         })
           // Assert
           .to.not.throw();

@@ -4,7 +4,11 @@ type FunctionPropertyNames<T> = { [K in keyof T]: T[K] extends Function ? K : ne
 type FunctionProperties<T> = Pick<T, FunctionPropertyNames<T>>;
 
 type NonFunctionPropertyNames<T> = { [K in keyof T]: T[K] extends Function ? never : K }[keyof T];
-export type NonFunctionProperties<T> = {[P in NonFunctionPropertyNames<T>] : T[P] extends number | string ? T[P]:NonFunctionProperties<T[P]> };
+export type NonFunctionProperties<T> = {
+  [P in NonFunctionPropertyNames<T>]: T[P] extends number | string
+    ? T[P]
+    : NonFunctionProperties<T[P]>;
+};
 
 export enum Mode {
   featureSet = 'featureSet',
@@ -35,12 +39,11 @@ export type TikkedClientMessage =
       payload: ContextData;
     };
 
-
 export const isValidClientMessage = (msg: any): msg is TikkedClientMessage =>
-    (msg?.type === 'changeMode' && Object.values(Mode).includes(msg?.payload)) ||
-    (msg?.type === 'context' && typeof msg?.payload === 'object');
-  
+  (msg?.type === 'changeMode' && Object.values(Mode).includes(msg?.payload)) ||
+  (msg?.type === 'context' && typeof msg?.payload === 'object');
+
 export const isValidServerMessage = (msg: any): msg is TikkedServerMessage =>
-    (msg?.type === 'featureSet' && typeof msg?.payload === 'object') ||
-    (msg?.type === 'applicationEnvironment' && typeof msg?.payload === 'object') ||
-    (msg?.type === 'mode' && Object.values(Mode).includes(msg?.payload));
+  (msg?.type === 'featureSet' && typeof msg?.payload === 'object') ||
+  (msg?.type === 'applicationEnvironment' && typeof msg?.payload === 'object') ||
+  (msg?.type === 'mode' && Object.values(Mode).includes(msg?.payload));

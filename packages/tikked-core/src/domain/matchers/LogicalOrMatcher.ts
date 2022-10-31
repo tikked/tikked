@@ -8,7 +8,7 @@ export class LogicalOrMatcher implements Matcher {
   public get Matchers() {
     return this.matchers;
   }
-  
+
   /**
    * Determines whether the provided context matches any of the provided matchers
    * @param context The context that is to be matched

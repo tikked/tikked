@@ -1,17 +1,9 @@
 import { concat, from, Observable, timer } from 'rxjs';
-import {
-  map,
-  filter,
-  distinctUntilChanged
-} from 'rxjs/operators';
+import { map, filter, distinctUntilChanged } from 'rxjs/operators';
 import { ApplicationEnvironment, validateIsNotEmpty } from '@tikked/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { Coder, DataStream } from '.';
-import {
-  Mode,
-  NonFunctionProperties,
-  isValidServerMessage
-} from './WebsocketInterface';
+import { Mode, NonFunctionProperties, isValidServerMessage } from './WebsocketInterface';
 import * as WebSocket from 'ws';
 
 export class WebsocketApiStream implements DataStream {
@@ -35,7 +27,7 @@ export class WebsocketApiStream implements DataStream {
 
   private getApplicationEnvironment(): Observable<string> {
     if (!this.obs) {
-      const subject = webSocket({url: this.url, WebSocketCtor: WebSocket as any});
+      const subject = webSocket({ url: this.url, WebSocketCtor: WebSocket as any });
       this.obs = subject.pipe(
         map((x) => {
           if (isValidServerMessage(x)) {

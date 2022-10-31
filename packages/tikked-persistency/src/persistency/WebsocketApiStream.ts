@@ -1,8 +1,8 @@
-import { concat, from, Observable, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, filter, distinctUntilChanged } from 'rxjs/operators';
 import { ApplicationEnvironment, validateIsNotEmpty } from '@tikked/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { Coder, DataStream } from '.';
+import { webSocket, WebSocketSubject, WebSocketSubjectConfig } from 'rxjs/webSocket';
+import { DataStream } from '.';
 import { Mode, NonFunctionProperties, isValidServerMessage } from './WebsocketInterface';
 import * as WebSocket from 'ws';
 
@@ -13,7 +13,7 @@ export class WebsocketApiStream implements DataStream {
    * Creates a REST API stream. Use @member read to start observing the content.
    * @param url The path to the REST endpoint that hosts the Application Environment
    */
-  public constructor(private url: string) {
+  public constructor(private url: string, private webSocketCtor: WebSocketSubjectConfig<unknown>["WebSocketCtor"] = WebSocket as any) {
     validateIsWSUrl(url);
   }
 
@@ -27,7 +27,7 @@ export class WebsocketApiStream implements DataStream {
 
   private getApplicationEnvironment(): Observable<string> {
     if (!this.obs) {
-      const subject = webSocket({ url: this.url, WebSocketCtor: WebSocket as any });
+      const subject = webSocket({ url: this.url, WebSocketCtor: this.webSocketCtor });
       this.obs = subject.pipe(
         map((x) => {
           if (isValidServerMessage(x)) {

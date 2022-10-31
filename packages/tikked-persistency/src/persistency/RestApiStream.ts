@@ -16,7 +16,7 @@ export class RestApiStream implements DataStream {
   }
 
   public write(content: string): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
   }
 
   public read(): Observable<string> {

@@ -65,9 +65,9 @@
         "lerna": "lerna",
         "test": "lerna run test",
         "coverage": "lerna run coverage",
-        "build": "lerna bootstrap",
+        "build": "lerna bootstrap && lerna run build",
+        "clean": "lerna clean && rimraf ./packages/*/{dist,.nyc_output,coverage}",
         "postinstall": "link-parent-bin",
-        "clean": "lerna clean",
         "pretty": "prettier-eslint ./packages/*/{src,test,samples}/**/*.{ts,js,json} ./packages/*/.*.{ts,js,json} --write",
         "audit-all": "lerna exec -- yarn audit --groups dependencies",
         "lernaupdate": "lernaupdate"

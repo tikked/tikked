@@ -40,3 +40,6 @@ export * from './ApplicationEnvironmentRepository';
 export * from './JsonCoder';
 export * from './FileStreamFactory';
 export * from './RestApiStreamFactory';
+export * from './WebsocketInterface';
+export * from './WebsocketApiStream';
+export * from './WebsocketApiStreamFactory';

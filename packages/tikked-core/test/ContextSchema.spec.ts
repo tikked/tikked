@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { useFakeTimers, SinonFakeTimers } from 'sinon';
 import { Context } from '../src/domain/Context';
 import { ContextSchema } from '../src/domain/ContextSchema';
 import { Toggle } from '../src/domain/Toggle';
@@ -310,6 +311,37 @@ describe('ContextSchema', () => {
         // Assert
         expect(res).to.equal(toggle3);
       });
+    });
+  });
+
+  describe('applyGlobalContext', () => {
+    const sourceContext = new Context({ key1: 'value1' });
+    const schema = new ContextSchema([]);
+    const currentTime = new Date();
+    let clock: SinonFakeTimers;
+
+    beforeEach(() => {
+        clock = useFakeTimers(currentTime.getTime());
+    });
+
+    afterEach(() => {
+        clock.restore();
+    });
+
+    it(`should return context with currentTime entry`, () => {
+      // Act
+      const res = schema.applyGlobalContext(sourceContext);
+
+      // Assert
+      expect(res.get('currentTime')).to.eql(currentTime.toISOString());
+    });
+
+    it('should return context with source data unchanged', () => {
+      // Act
+      const res = schema.applyGlobalContext(sourceContext);
+
+      // Assert
+      expect(res.toJSON()).to.include(sourceContext.toJSON());
     });
   });
 });

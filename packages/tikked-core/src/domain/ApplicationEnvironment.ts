@@ -47,8 +47,10 @@ export class ApplicationEnvironment implements Identifiable {
    */
   public getFeatureSet(context: Context): FeatureSet {
     const filteredContext = this.contextSchema.filterContext(context);
+    const globalizedContext = this.contextSchema.applyGlobalContext(filteredContext);
+    
     const activeFeatureFlags = this.featureFlags.filter((ff) => {
-      const toggles = ff.getToggles(filteredContext);
+      const toggles = ff.getToggles(globalizedContext);
       return toggles.length > 0 && this.contextSchema.getMostRelevant(toggles).IsActive;
     });
     return new Set<string>(activeFeatureFlags.map((ff) => ff.Id));

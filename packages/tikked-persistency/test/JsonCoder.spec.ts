@@ -1,5 +1,21 @@
 import { expect } from 'chai';
-import { ApplicationEnvironment, ContextMatcher } from '@tikked/core';
+import * as fc from 'fast-check';
+import { z } from 'zod';
+import {
+  ApplicationEnvironment,
+  Attribute,
+  Context,
+  ContextMatcher,
+  ContextSchema,
+  ExactMatcher,
+  FeatureFlag,
+  LogicalAndMatcher,
+  LogicalNotMatcher,
+  LogicalOrMatcher,
+  RegexMatcher,
+  SupersetMatcher,
+  Toggle
+} from '@tikked/core';
 import { JsonCoder } from '../src/persistency/JsonCoder';
 import {
   createAttribute,
@@ -181,7 +197,7 @@ describe('JsonCoder', () => {
       const description = createDescription();
       const isActive = true;
       const context = {};
-      const matcher = { $type: 'superset', context };
+      const matcher = { $superset: context };
       const contextSchema = {
         attributes: []
       };
@@ -384,6 +400,144 @@ describe('JsonCoder', () => {
         // Assert
         expect(res).to.contain('"featureFlags":[]');
       });
+    });
+
+    const decodedAttributes = fc
+      .record({
+        id: fc.string(),
+        name: fc.string(),
+        description: fc.string()
+      })
+      .map((attribute) => new Attribute(attribute.id, attribute.name, attribute.description));
+
+    const decodedContextSchema = fc
+      .uniqueArray(decodedAttributes, { minLength: 3, maxLength: 5, selector: (a) => a.Id })
+      .map((attributes) => new ContextSchema(attributes));
+
+    const decodedContext = fc
+      .object({ maxDepth: 0, values: [fc.hexaString()], maxKeys: 5 })
+      .map((c: Record<string, string>) => new Context(c));
+
+    const decodedContextMatcher = fc
+      .record({
+        constructor: fc.constantFrom(ExactMatcher, SupersetMatcher, RegexMatcher),
+        context: decodedContext
+      })
+      .map((m) => new m.constructor(m.context));
+
+    const decodedNotMatcher = fc.oneof(decodedContextMatcher).map((m) => new LogicalNotMatcher(m));
+    const decodedAndMatcher = fc
+      .array(decodedContextMatcher, { minLength: 2, maxLength: 5 })
+      .map((m) => new LogicalAndMatcher(m));
+    const decodedOrMatcher = fc
+      .array(decodedContextMatcher, { minLength: 2, maxLength: 5 })
+      .map((m) => new LogicalOrMatcher(m));
+
+    const decodedToggle = fc
+      .record({
+        isActive: fc.boolean(),
+        matcher: fc.oneof(
+          decodedContextMatcher,
+          decodedNotMatcher,
+          decodedAndMatcher,
+          decodedOrMatcher
+        )
+      })
+      .map((t) => new Toggle(t.isActive, t.matcher));
+
+    const decodedFeatureFlag = fc
+      .record({
+        id: fc.string({ minLength: 1 }),
+        name: fc.string(),
+        description: fc.string(),
+        toggles: fc.array(decodedToggle, { minLength: 3, maxLength: 5 })
+      })
+      .map((f) => new FeatureFlag(f.id, f.name, f.description, f.toggles));
+
+    const decodedEnvironment = fc
+      .record({
+        id: fc.string({ minLength: 1 }),
+        name: fc.string(),
+        description: fc.string(),
+        contextSchema: decodedContextSchema,
+        featureFlags: fc.uniqueArray(decodedFeatureFlag, {
+          minLength: 3,
+          maxLength: 5,
+          selector: (ff) => ff.Id
+        })
+      })
+      .map(
+        (record) =>
+          new ApplicationEnvironment(
+            record.id,
+            record.name,
+            record.description,
+            record.contextSchema,
+            record.featureFlags
+          )
+      );
+
+    const encodingMatcherKeys = z.union([
+      z.literal('$superset'),
+      z.literal('$exact'),
+      z.literal('$regex'),
+      z.literal('$and'),
+      z.literal('$or'),
+      z.literal('$not')
+    ]);
+    const encodingMatcherSchema = z.lazy(() =>
+      z.record(
+        encodingMatcherKeys,
+        z.union([
+          z.record(z.string(), z.string()),
+          encodingMatcherSchema,
+          z.array(encodingMatcherSchema)
+        ])
+      )
+    );
+    const encodingSchema = z.object({
+      id: z.string(),
+      name: z.string().optional(),
+      description: z.string().optional(),
+      contextSchema: z.object({
+        attributes: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string().optional(),
+            description: z.string().optional()
+          })
+        )
+      }),
+      featureFlags: z.array(
+        z.object({
+          id: z.string(),
+          name: z.string().optional(),
+          description: z.string().optional(),
+          toggles: z.array(
+            z.object({
+              isActive: z.boolean(),
+              matcher: encodingMatcherSchema
+            })
+          )
+        })
+      )
+    });
+
+    it('should produce encoded json data', () => {
+      fc.assert(
+        fc.property(decodedEnvironment, (data) => {
+          const decoder = new JsonCoder();
+
+          const jsonString = decoder.encode(data);
+          const result = encodingSchema.safeParse(JSON.parse(jsonString));
+          if (!result.success) {
+            throw result.error;
+          }
+
+          return result.success;
+        }),
+        { numRuns: 100 }
+      );
     });
   });
   describe('encode->decode mirror', () => {

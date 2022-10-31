@@ -17,7 +17,8 @@
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-axios": "^3.0.1",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.0-0",
+    "tailwindcss": "^2.2.16"
   },
   "private": true,
   "eslintConfig": {
@@ -43,7 +44,6 @@
     "@vitejs/plugin-vue": "^1.9.3",
     "autoprefixer": "^10.3.7",
     "postcss": "^8.3.9",
-    "tailwindcss": "^2.2.16",
     "vite": "^2.6.3"
   }
 }

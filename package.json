@@ -64,7 +64,7 @@
     "scripts": {
         "lerna": "lerna",
         "test": "lerna run test",
-        "coverage": "lerna run coverage",
+        "coverage": "lerna run coverage --stream",
         "build": "lerna bootstrap && lerna run build",
         "clean": "lerna clean && rimraf ./packages/*/{dist,.nyc_output,coverage}",
         "postinstall": "link-parent-bin",

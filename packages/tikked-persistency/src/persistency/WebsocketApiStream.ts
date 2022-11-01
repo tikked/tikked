@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { map, filter, distinctUntilChanged } from 'rxjs/operators';
+import { map, filter, distinctUntilChanged, retry, shareReplay } from 'rxjs/operators';
 import { ApplicationEnvironment, validateIsNotEmpty } from '@tikked/core';
 import { webSocket, WebSocketSubject, WebSocketSubjectConfig } from 'rxjs/webSocket';
 import { DataStream } from '.';
@@ -10,8 +10,8 @@ export class WebsocketApiStream implements DataStream {
   private obs: Observable<string>;
 
   /**
-   * Creates a REST API stream. Use @member read to start observing the content.
-   * @param url The path to the REST endpoint that hosts the Application Environment
+   * Creates a Websocket API stream. Use @member read to start observing the content.
+   * @param url The path to the websocket endpoint that hosts the Application Environment
    */
   public constructor(private url: string, private webSocketCtor: WebSocketSubjectConfig<unknown>["WebSocketCtor"] = WebSocket as any) {
     validateIsWSUrl(url);
@@ -36,10 +36,8 @@ export class WebsocketApiStream implements DataStream {
                 respondToMode(x.payload, subject);
                 return;
               case 'featureSet':
-                respondToFeatureSet(x.payload, subject);
                 return;
               case 'applicationEnvironment':
-                respondToApplicationEnvironment(x.payload, subject);
                 return JSON.stringify(x.payload);
             }
           }
@@ -48,7 +46,6 @@ export class WebsocketApiStream implements DataStream {
         filter<string | undefined, string>(isString),
         distinctUntilChanged()
       );
-      subject.next({ type: 'changeMode', payload: 'applicationEnvironment' });
     }
     return this.obs;
   }
@@ -74,13 +71,4 @@ function respondToMode(payload: Mode, subject: WebSocketSubject<unknown>) {
       subject.next({ type: 'changeMode', payload: 'applicationEnvironment' });
       break;
   }
-}
-function respondToFeatureSet(payload: string[], subject: WebSocketSubject<unknown>) {
-  //throw new Error('Function not implemented.');
-}
-function respondToApplicationEnvironment(
-  payload: NonFunctionProperties<ApplicationEnvironment>,
-  subject: WebSocketSubject<unknown>
-) {
-  //throw new Error('Function not implemented.');
 }

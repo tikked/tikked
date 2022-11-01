@@ -1,7 +1,13 @@
 import 'reflect-metadata';
 import { combineLatest, Observable } from 'rxjs';
 import { Context } from '@tikked/core/dist/src/domain';
-import { ApplicationEnvironmentRepository, Coder, isValidClientMessage, Mode, TYPES } from '@tikked/persistency';
+import {
+  ApplicationEnvironmentRepository,
+  Coder,
+  isValidClientMessage,
+  Mode,
+  TYPES
+} from '@tikked/persistency';
 import * as WebSocket from 'ws';
 import { Server } from 'ws';
 import { createContainer } from './inversify.config';
@@ -38,6 +44,7 @@ wss.on('connection', function connection(ws, req) {
       }
     });
     ws.on('close', () => sub.unsubscribe());
+    ws.send(JSON.stringify({ type: 'mode', payload: mode }));
   } catch (e) {
     console.error(e);
     ws.close();
@@ -55,7 +62,10 @@ wss.on('connection', function connection(ws, req) {
                 break;
               case 'changeMode':
                 mode = message.payload;
-                observer.next(new Context({}));
+                ws.send(JSON.stringify({ type: 'mode', payload: mode }));
+                if (mode === Mode.applicationEnvironment) {
+                  observer.next(new Context({}));
+                }
                 break;
             }
           }

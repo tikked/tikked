@@ -51,7 +51,7 @@ export function showCliHelp() {
         header: 'Synopsis',
         content: [
           // tslint:disable-next-line: max-line-length
-          `$ tkd --root {underline folder} --application-environment {underline string} [--context] {underline contextjson} ...`,
+          `$ tkd --root {underline folder or base-URL} --application-environment {underline string} [--context] {underline contextjson} ...`,
           '$ tkd --help'
         ]
       },

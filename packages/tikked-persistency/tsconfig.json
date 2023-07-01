@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "typeRoots": ["../../node_modules/@types", "./typings"],
-    "types": ["inversify", "reflect-metadata", "mocha", "node"]
+    "outDir": "dist"
   },
   "extends": "../../tsconfig.json"
 }

@@ -1,5 +1,5 @@
 import * as chai from 'chai';
-const chaiHttp = require('chai-http');
+import chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 import { createApp } from '../app';
 import { expect } from 'chai';

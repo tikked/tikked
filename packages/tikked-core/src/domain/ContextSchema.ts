@@ -45,15 +45,15 @@ export class ContextSchema {
 
   /**
    * Applies a global context to the given context object and returns a new context.
-   * 
+   *
    * The global context contains the following attributes:
    * - currentTime (ISO date string)
-   * @param context 
+   * @param context
    */
   public applyGlobalContext(context: Context): Context {
     const globalContextData = {
       currentTime: new Date().toISOString()
     };
-    return new Context({...context.toJSON(), ...globalContextData});
+    return new Context({ ...context.toJSON(), ...globalContextData });
   }
 }

@@ -31,6 +31,6 @@
     "inversify": "6.0.1",
     "@tikked/core": "0.0.1",
     "@tikked/persistency": "0.0.1",
-    "ws": "^8.7.0"
+    "ws": "^8.10.0"
   }
 }

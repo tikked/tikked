@@ -29,6 +29,6 @@ export class Context {
   }
 }
 
-interface ContextData {
+export interface ContextData {
   [key: string]: string;
 }

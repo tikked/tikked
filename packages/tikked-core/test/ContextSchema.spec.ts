@@ -321,11 +321,11 @@ describe('ContextSchema', () => {
     let clock: SinonFakeTimers;
 
     beforeEach(() => {
-        clock = useFakeTimers(currentTime.getTime());
+      clock = useFakeTimers(currentTime.getTime());
     });
 
     afterEach(() => {
-        clock.restore();
+      clock.restore();
     });
 
     it(`should return context with currentTime entry`, () => {

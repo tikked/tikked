@@ -45,6 +45,27 @@
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch WS",
+            "runtimeArgs": [
+                "--require",
+                "ts-node/register",
+                "--require",
+                "source-map-support/register"
+            ],
+            "args": [
+                "${workspaceFolder}/index.ts",
+                "-r",
+                "ws://localhost:8080",
+                "-a",
+                "ps",
+                "{}"
+            ],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
         }
     ]
 }

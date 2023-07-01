@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "types": ["mocha", "node"]
+    "outDir": "dist"
   },
   "extends": "../../tsconfig.json"
 }

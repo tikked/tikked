@@ -13,12 +13,12 @@
     "prepare": "vite build"
   },
   "dependencies": {
-    "axios": "0.27.2",
+    "axios": "1.4.0",
     "core-js": "^3.6.5",
+    "tailwindcss": "^2.2.16",
     "vue": "^3.0.0",
     "vue-axios": "^3.0.1",
-    "vue-router": "^4.0.0-0",
-    "tailwindcss": "^2.2.16"
+    "vue-router": "^4.0.0-0"
   },
   "private": true,
   "eslintConfig": {

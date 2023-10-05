@@ -56,21 +56,23 @@
     "Toggle": {
       "properties": {
         "matcher": {
-          "anyOf": [{
-            "properties": {
-              "context": {
-                "$ref": "#/definitions/Context"
+          "anyOf": [
+            {
+              "properties": {
+                "context": {
+                  "$ref": "#/definitions/Context"
+                },
+                "$type": {
+                  "enum": ["superset", "exact"]
+                }
               },
-              "$type": {
-                "enum": ["superset", "exact"]
-              }
-            },
-            "type": "object"
-          }]
+              "type": "object"
+            }
+          ]
         },
         "isActive": {
           "type": "boolean"
-        },
+        }
       },
       "type": "object"
     }

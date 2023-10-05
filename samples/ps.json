@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/tikked-persitency/ApplicationEnvironment.json",
+  "$schema": "../packages/tikked-persistency/ApplicationEnvironment.json",
   "id": "ps",
   "name": "Project System",
   "contextSchema": {

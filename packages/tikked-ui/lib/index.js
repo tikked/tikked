@@ -11,22 +11,19 @@ const DEFAULT_OPTIONS = {
   adminApiUrl: 'http://localhost:3000'
 };
 
-module.exports = options => {
+module.exports = (options) => {
   return (req, res, next) => {
     options = {
       ...options,
       ...DEFAULT_OPTIONS
     };
 
-    switch (req.path) {
-      case INDEX_FILE_PATH:
-        injectBaseHrefAndServeIndexFile(req, res, next);
-        break;
-      case ENV_FILE_PATH:
-        generateAndServeEnvFile(req, res, next);
-        break;
-      default:
-        return express.static(path.join(__dirname, DIST_FOLDER))(req, res, next);
+    if (req.path === ENV_FILE_PATH) {
+      generateAndServeEnvFile(req, res, next);
+    } else if (req.path.includes('.')) {
+      return express.static(path.join(__dirname, DIST_FOLDER))(req, res, next);
+    } else {
+      injectBaseHrefAndServeIndexFile(req, res, next);
     }
   };
 
@@ -37,7 +34,7 @@ module.exports = options => {
       let indexFileContent = fs.readFileSync(indexFilePath).toString();
       indexFileContent = indexFileContent.replace(
         '<base href="">',
-        `<base href="${req.baseUrl.replace('/', '')}">`
+        `<base href="/${req.baseUrl.replace('/', '')}/">`
       );
       res.type(path.extname(INDEX_FILE_NAME));
       res.send(indexFileContent);

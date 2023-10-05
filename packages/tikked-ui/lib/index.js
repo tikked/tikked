@@ -11,16 +11,16 @@ const DEFAULT_OPTIONS = {
   adminApiUrl: 'http://localhost:3000'
 };
 
-module.exports = options => {
+module.exports = (options) => {
   return (req, res, next) => {
     options = {
       ...options,
       ...DEFAULT_OPTIONS
     };
 
-    if(req.path === ENV_FILE_PATH) {
-        generateAndServeEnvFile(req, res, next);
-    } else if(req.path.includes('.')) {
+    if (req.path === ENV_FILE_PATH) {
+      generateAndServeEnvFile(req, res, next);
+    } else if (req.path.includes('.')) {
       return express.static(path.join(__dirname, DIST_FOLDER))(req, res, next);
     } else {
       injectBaseHrefAndServeIndexFile(req, res, next);

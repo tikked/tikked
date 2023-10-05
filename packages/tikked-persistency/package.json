@@ -4,14 +4,14 @@
   "description": "A feature flag thingy",
   "main": "dist/src/index.js",
   "dependencies": {
-    "axios": "0.27.2",
+    "@tikked/core": "0.0.1",
+    "axios": "1.4.0",
     "inversify": "6.0.1",
     "inversify-express-utils": "^6.3.2",
     "io-ts": "^1.10.4",
     "io-ts-reporters": "0.0.21",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.1.0",
-    "@tikked/core": "0.0.1"
+    "rxjs": "^7.1.0"
   },
   "private": true,
   "nyc": {

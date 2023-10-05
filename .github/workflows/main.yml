@@ -37,7 +37,7 @@ jobs:
     - name: Install dependencies
       run: yarn install --frozen-lockfile
 
-    - name: Lerna build
+    - name: Build
       run: yarn build
       
     - name: Test

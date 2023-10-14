@@ -1,6 +1,5 @@
 {
-  "$schema": "../packages/tikked-persistency/ApplicationEnvironment.json",
-  "id": "ps",
+  "$schema": "https://raw.githubusercontent.com/tikked/tikked/main/packages/tikked-persistency/ApplicationEnvironment.json",
   "name": "Project System",
   "contextSchema": {
     "attributes": [
@@ -12,7 +11,7 @@
       {
         "id": "projectId",
         "name": "Project Id",
-        "description": "The id of the study (mongo id)"
+        "description": "The id of the project (mongo id)"
       }
     ]
   },

@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/tikked/tikked/main/packages/tikked-persistency/ApplicationEnvironment.json",
+  "id": "ps",
   "name": "Project System",
   "contextSchema": {
     "attributes": [

@@ -8,5 +8,6 @@ router.get('/', controller.getAll);
 router.post('/', controller.createOne);
 router.get('/:envId', controller.getOne);
 router.put('/:envId', controller.updateOne);
+router.delete('/:envId', controller.deleteOne);
 
 export default router;

@@ -13,7 +13,10 @@ export class WebsocketApiStream implements DataStream {
    * Creates a Websocket API stream. Use @member read to start observing the content.
    * @param url The path to the websocket endpoint that hosts the Application Environment
    */
-  public constructor(private url: string, private webSocketCtor: WebSocketSubjectConfig<unknown>["WebSocketCtor"] = WebSocket as any) {
+  public constructor(
+    private url: string,
+    private webSocketCtor: WebSocketSubjectConfig<unknown>['WebSocketCtor'] = WebSocket as any
+  ) {
     validateIsWSUrl(url);
   }
 

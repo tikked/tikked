@@ -1,6 +1,5 @@
 import { injectable } from 'inversify';
-import * as t from 'io-ts';
-import { reporter } from 'io-ts-reporters';
+import { validate } from 'jsonschema';
 import {
   ApplicationEnvironment,
   Attribute,
@@ -18,6 +17,7 @@ import {
   ContextMatcher
 } from '@tikked/core';
 import { Decoder, Encoder } from '.';
+import * as schemaObj from '../../ApplicationEnvironment.json'
 
 type UnmappedMatcherContext = { [key: string]: string };
 
@@ -27,59 +27,11 @@ type UnmappedMatcher = {
 
 @injectable()
 export class JsonCoder implements Encoder<string>, Decoder<string> {
-  private static idNameDesc = {
-    id: t.string,
-    name: t.string,
-    description: t.string
-  };
-
-  private static contextDecoder = t.record(t.string, t.string);
-
-  private static matcherDecoder: t.Type<UnmappedMatcher> = t.recursion('Matcher', () =>
-    t.record(
-      t.string,
-      t.union([
-        JsonCoder.contextDecoder,
-        t.array(JsonCoder.matcherDecoder),
-        JsonCoder.matcherDecoder
-      ])
-    )
-  );
-
-  private static toggleDecoder = t.type({
-    isActive: t.boolean,
-    matcher: JsonCoder.matcherDecoder
-  });
-
-  private static featureFlagDecoder = t.type({
-    ...JsonCoder.idNameDesc,
-    toggles: t.array(JsonCoder.toggleDecoder)
-  });
-
-  private static attributeDecoder = t.type({
-    ...JsonCoder.idNameDesc
-  });
-
-  private static contextSchemaDecoder = t.type({
-    attributes: t.array(JsonCoder.attributeDecoder)
-  });
-
-  private static applicationEnvironmentDecoder = t.type({
-    ...JsonCoder.idNameDesc,
-    featureFlags: t.array(JsonCoder.featureFlagDecoder),
-    contextSchema: JsonCoder.contextSchemaDecoder
-  });
-
   public decode(input: string): ApplicationEnvironment {
     const parsed = JSON.parse(input);
-    const decoded = JsonCoder.applicationEnvironmentDecoder.decode(parsed);
-    const res = decoded.fold(
-      (errors) => {
-        const messages = reporter(decoded);
-        throw new Error(messages.join('\n'));
-      },
-      (value) => value
-    );
+    const result = validate(parsed, schemaObj);
+    if (result.errors.length > 0) throw result.errors[0];
+    const res = parsed;
     return new ApplicationEnvironment(
       res.id,
       res.name,

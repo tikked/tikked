@@ -97,5 +97,6 @@
       "type": "string"
     }
   },
+  "required": ["id","name","featureFlags","contextSchema","description"],
   "type": "object"
 }

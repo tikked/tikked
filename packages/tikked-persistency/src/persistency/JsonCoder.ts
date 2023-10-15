@@ -18,6 +18,7 @@ import {
 } from '@tikked/core';
 import { Decoder, Encoder } from '.';
 import { readFileSync } from 'fs';
+import path = require('path');
 
 type UnmappedMatcherContext = { [key: string]: string };
 
@@ -29,12 +30,14 @@ type UnmappedMatcher = {
 export class JsonCoder implements Encoder<string>, Decoder<string> {
   schema: object;
   public constructor() {
-    this.schema = JSON.parse(readFileSync("./ApplicationEnvironment.json").toString());
+    this.schema = JSON.parse(
+      readFileSync(path.join(__dirname, '..', '..', 'ApplicationEnvironment.json')).toString()
+    );
   }
 
   public decode(input: string): ApplicationEnvironment {
     const parsed = JSON.parse(input);
-    const result = validate(parsed,this.schema);
+    const result = validate(parsed, this.schema);
     if (result.errors.length > 0) throw result.errors[0];
     const res = parsed;
     return new ApplicationEnvironment(

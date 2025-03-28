@@ -2,7 +2,7 @@
 // tslint:disable-next-line: ordered-imports
 import 'reflect-metadata';
 import {json, urlencoded} from 'body-parser';
-import * as cors from 'cors';
+import cors from 'cors';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { createContainer } from './inversify.config';
 

@@ -25,15 +25,15 @@
   "dependencies": {
     "@tikked/core": "0.0.1",
     "@tikked/persistency": "0.0.1",
-    "body-parser": "^1.19.0",
+    "body-parser": "1.20.3",
     "cors": "^2.8.5",
-    "express": "4.18.2",
-    "inversify": "6.0.1",
-    "inversify-express-utils": "^6.3.2",
+    "express": "4.20.0",
+    "inversify": "6.0.2",
+    "inversify-express-utils": "6.4.6",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.1.0"
+    "rxjs": "7.8.1"
   },
   "devDependencies": {
-    "ts-node": "^10.8.1"
+    "ts-node": "10.9.2"
   }
 }

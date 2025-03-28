@@ -23,11 +23,11 @@
   },
   "homepage": "https://github.com/tikked/tikked#readme",
   "dependencies": {
-    "command-line-args": "^5.1.1",
-    "command-line-usage": "^6.0.1",
-    "inversify": "6.0.1",
-    "reflect-metadata": "^0.1.13",
     "@tikked/core": "0.0.1",
-    "@tikked/persistency": "0.0.1"
+    "@tikked/persistency": "0.0.1",
+    "command-line-args": "6.0.0",
+    "command-line-usage": "7.0.3",
+    "inversify": "6.0.2",
+    "reflect-metadata": "^0.1.13"
   }
 }

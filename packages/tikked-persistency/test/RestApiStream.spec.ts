@@ -1,6 +1,6 @@
 import { expect, use as chaiUse } from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
-import * as sinonChai from 'sinon-chai';
+import chaiAsPromised from 'chai-as-promised';
+import sinonChai from 'sinon-chai';
 import { RestApiStream } from '../src/persistency/RestApiStream';
 chaiUse(sinonChai);
 chaiUse(chaiAsPromised);

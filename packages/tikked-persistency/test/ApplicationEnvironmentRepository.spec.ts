@@ -1,13 +1,15 @@
 import { expect, use as chaiUse } from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
-import { of } from 'rxjs';
+import chaiAsPromised from 'chai-as-promised';
+import { firstValueFrom, lastValueFrom, Observable, of } from 'rxjs';
 import { SinonStub, stub } from 'sinon';
-import * as sinonChai from 'sinon-chai';
-import * as sinon from 'ts-sinon';
+import sinonChai from 'sinon-chai';
+import {stubInterface} from '@salesforce/ts-sinon';
+import * as sinon from 'sinon';
 import { ApplicationEnvironment } from '@tikked/core';
 import { Coder, DataStream, StreamFactory } from '../src/persistency';
 import { ApplicationEnvironmentRepository } from '../src/persistency/ApplicationEnvironmentRepository';
 import { createApplicationEnvironment, createId } from './Fixture';
+import { triggerAsyncId } from 'async_hooks';
 chaiUse(sinonChai);
 chaiUse(chaiAsPromised);
 
@@ -19,8 +21,8 @@ describe('ApplicationEnvironmentRepository', () => {
         beforeEach(() => {
           // Act
           repo = new ApplicationEnvironmentRepository(
-            sinon.stubInterface<StreamFactory<DataStream>>({}),
-            sinon.stubInterface<Coder<string>>({}),
+            stubInterface<StreamFactory<DataStream>>(sinon),
+            stubInterface<Coder<string>>(sinon),
             undefined
           );
         });
@@ -40,16 +42,23 @@ describe('ApplicationEnvironmentRepository', () => {
       let stubbedStreamFactory: StreamFactory<DataStream>;
       let stubbedCoder: Coder<string>;
       let repo: ApplicationEnvironmentRepository;
+      let create: (inId: string) => DataStream<string>
+      let decode: (code: string) => ApplicationEnvironment
+      let read: () => Observable<string>
+
       beforeEach(() => {
         // Arrange
         id = createId();
         appEnv = createApplicationEnvironment(id);
         stubbedErrorHandler = stub();
-        stubbedStream = sinon.stubInterface<DataStream>({ read: of('appEnv') });
-        stubbedStreamFactory = sinon.stubInterface<StreamFactory<DataStream>>({
-          create: stubbedStream
+        read = () => of('appEnv')
+        stubbedStream = stubInterface<DataStream>(sinon,{ read: () => read() });
+        create = () => stubbedStream;
+        stubbedStreamFactory = stubInterface<StreamFactory<DataStream>>(sinon,{
+          create: (inId) => create(inId)
         });
-        stubbedCoder = sinon.stubInterface<Coder<string>>({ decode: appEnv });
+        decode = () => appEnv
+        stubbedCoder = stubInterface<Coder<string>>(sinon,{ decode: (code) => decode(code) });
         repo = new ApplicationEnvironmentRepository(
           stubbedStreamFactory,
           stubbedCoder,
@@ -59,7 +68,7 @@ describe('ApplicationEnvironmentRepository', () => {
       describe('when called with id of persisted application environment', () => {
         it('should return corresponding application environment', async () => {
           // Act
-          const res = await repo.get(id).toPromise();
+          const res = await firstValueFrom(repo.get(id));
           // Assert
           expect(res).to.be.equal(appEnv);
         });
@@ -67,12 +76,10 @@ describe('ApplicationEnvironmentRepository', () => {
       describe('when called with non-existent id', () => {
         it('should throw an error', () => {
           const expectedMessage = 'some-message';
-          stubbedStreamFactory.create = () => {
-            throw new Error(expectedMessage);
-          };
+          create = () => {throw new Error(expectedMessage)};
           // Act
           return (
-            expect(repo.get(id).toPromise())
+            expect(firstValueFrom(repo.get(id+'x')))
               // Assert
               .to.be.rejectedWith(Error, expectedMessage)
           );
@@ -81,8 +88,8 @@ describe('ApplicationEnvironmentRepository', () => {
       describe('when called with same id multiple times', () => {
         it('should only create from factory once', async () => {
           // Act
-          await repo.get(id).toPromise();
-          await repo.get(id).toPromise();
+          await firstValueFrom(repo.get(id));
+          await firstValueFrom(repo.get(id));
           // Assert
           expect(stubbedStreamFactory.create).to.be.calledOnce;
         });
@@ -90,10 +97,10 @@ describe('ApplicationEnvironmentRepository', () => {
       describe('when called with id that causes decoder to throw', () => {
         it('should throw an error', () => {
           const expectedMessage = 'some-message';
-          stubbedCoder.decode = stub().throws(new Error(expectedMessage));
+          decode = () => {throw new Error(expectedMessage)};
           // Act
           return (
-            expect(repo.get(id).toPromise())
+            expect(firstValueFrom(repo.get(id)))
               // Assert
               .to.be.rejectedWith(Error, expectedMessage)
           );
@@ -101,17 +108,16 @@ describe('ApplicationEnvironmentRepository', () => {
       });
       describe('when called with id that causes decoder to throw on second call', () => {
         let expectedMessage: string;
-        let decode: SinonStub;
         beforeEach(() => {
           expectedMessage = 'some-message';
-          stubbedStream.read = stub().returns(of('1', '2'));
-          decode = stub();
-          stubbedCoder.decode = decode;
-          decode.onCall(0).returns(appEnv);
-          decode.onCall(1).throws(new Error(expectedMessage));
+          read = stub().returns(of('1', '2'));
+          const temp = stub();
+          temp.onCall(0).returns(appEnv);
+          temp.onCall(1).throws(new Error(expectedMessage));
+          decode = temp;
         });
         it('should call error handler once', async () => {
-          await repo.get(id).toPromise();
+          await lastValueFrom(repo.get(id));
           expect(stubbedErrorHandler).to.be.calledOnce;
           expect(stubbedErrorHandler.getCall(0).args[0])
             .to.be.an('Error')

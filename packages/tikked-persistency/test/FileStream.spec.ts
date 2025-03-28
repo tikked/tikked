@@ -2,12 +2,12 @@ import { fail } from 'assert';
 import { existsSync, promises as fsPromises } from 'fs';
 import { join } from 'path';
 import { expect, use as chaiUse } from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
+import chaiAsPromised from 'chai-as-promised';
 import { Observable, Subscription } from 'rxjs';
 import { fake, SinonSpy, SinonStub, spy, stub } from 'sinon';
-import * as sinonChai from 'sinon-chai';
+import sinonChai from 'sinon-chai';
 import { FileStream } from '../src/persistency/FileStream';
-import { becomesTrue, createApplicationEnvironment, createString } from './Fixture';
+import { becomesTrue, createString } from './Fixture';
 chaiUse(sinonChai);
 chaiUse(chaiAsPromised);
 

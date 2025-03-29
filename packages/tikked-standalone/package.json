@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@tikked/ui": "0.0.1",
-    "express": "4.20.0"
+    "express": "4.21.2"
   },
   "devDependencies": {
     "nodemon": "3.1.4"

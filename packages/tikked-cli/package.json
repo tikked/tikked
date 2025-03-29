@@ -25,9 +25,9 @@
   "dependencies": {
     "@tikked/core": "0.0.1",
     "@tikked/persistency": "0.0.1",
-    "command-line-args": "6.0.0",
+    "command-line-args": "6.0.1",
     "command-line-usage": "7.0.3",
-    "inversify": "6.0.2",
+    "inversify": "6.2.2",
     "reflect-metadata": "^0.1.13"
   }
 }

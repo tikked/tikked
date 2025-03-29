@@ -5,12 +5,12 @@
   "main": "dist/src/index.js",
   "dependencies": {
     "@tikked/core": "0.0.1",
-    "axios": "1.7.7",
-    "inversify": "6.0.2",
-    "inversify-express-utils": "6.4.6",
+    "axios": "1.8.4",
+    "inversify": "6.2.2",
+    "inversify-express-utils": "6.5.0",
     "jsonschema": "1.4.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "7.8.1"
+    "rxjs": "7.8.2"
   },
   "private": true,
   "nyc": {
